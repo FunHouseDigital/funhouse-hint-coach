@@ -12,16 +12,21 @@ async function fetchModelBlob(onProgress) {
   if (!res.ok) throw new Error('Model file not found: ' + MODEL.path + ' (run: node scripts/fetch-model.js)');
   const total = Number(res.headers.get('content-length')) || MODEL.bytes;
   const reader = res.body.getReader();
-  const parts = [];
+  // Fold chunks into a Blob every 32 MB so the browser can move them out of page memory.
+  let blob = new Blob([]);
+  let parts = [];
+  let partBytes = 0;
   let got = 0;
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
     parts.push(value);
+    partBytes += value.length;
     got += value.length;
+    if (partBytes > 32e6) { blob = new Blob([blob, ...parts]); parts = []; partBytes = 0; }
     onProgress?.(got, total);
   }
-  return new Blob(parts);
+  return new Blob([blob, ...parts]);
 }
 
 export function ensureModel(onProgress) {

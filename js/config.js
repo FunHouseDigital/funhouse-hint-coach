@@ -10,4 +10,3 @@ export const GEN = { max_tokens: 8, temperature: 0 }; // greedy, tiny answer, cu
 export const N_CTX = 1024;
 export const PACKS = ['t1-l1', 't2-l1', 't3-l1', 'g910-t1-l1'];
 export const SIDES = ['INPUT', 'PROCESSING', 'OUTPUT', 'STORAGE'];
-export const CACHE_NAME = 'hint-coach-v1';
