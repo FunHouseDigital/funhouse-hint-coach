@@ -59,6 +59,9 @@ const checks = [
   ['Looking at this answer, I think', null], ['Look at the book', null], ['incorrect', null], ['banana', null],
   ['correct', 'ok'], ['Label: correct', 'ok'], ['ok', 'ok'], ['OK.', 'ok'],
   ['swapped_if_then', 'swapped_if_then'], ['The label is missing_then.', 'missing_then'],
+  // found by Kiro in v0.1.1: negated or mixed replies must never read as done
+  ['not correct', null], ["This is not correct, wrong_then", 'wrong_then'], ["isn't correct", null], ["It is not quite correct", null],
+  ['correct or wrong_then', null], ['wrong_then, correct', null], ['This is not really correct.', null], ['correct. wrong_then is wrong', null],
 ];
 for (const [text, want] of checks) if (pc(text) !== want) bad(`parseChoice(${JSON.stringify(text)}) gave ${pc(text)}, wanted ${want}`);
 if (!classifyPrompt(packs['t3-l1'], ex, 'x').includes('- correct:')) bad('prompt must offer the label "correct"');

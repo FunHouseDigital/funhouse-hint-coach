@@ -168,15 +168,22 @@ export function classifyPrompt(pack, ex, attempt) {
 }
 
 // Reads the model's reply. Whole-word matching only, so words like "look" or "book" can never read as a label.
-// null means the reply was unclear: the app then uses the keyword baseline result instead.
+// A "correct" with a negation just before it ("not correct", "isn't quite correct") is ignored.
+// If the reply names more than one different label, or none, it is unclear and null is returned:
+// the app then uses the keyword baseline result instead. An unclear reply can never show "done".
 export function parseChoice(modelText, ex) {
   if (/^\s*ok\W*$/i.test(modelText)) return 'ok';
   const ids = ['correct', ...ex.labels];
-  const rx = new RegExp('(?<![a-z_])(' + ids.join('|') + ')(?![a-z_])', 'i');
-  const m = rx.exec(modelText);
-  if (!m) return null;
-  const id = m[1].toLowerCase();
-  return id === 'correct' ? 'ok' : id;
+  const rx = new RegExp('(?<![a-z_])(' + ids.join('|') + ')(?![a-z_])', 'gi');
+  const NEG = /\b(not|never|no|isn'?t|aren'?t|wasn'?t|doesn'?t|don'?t)\s+(?:\w+\s+){0,2}$/i;
+  const found = new Set();
+  let m;
+  while ((m = rx.exec(modelText)) !== null) {
+    const id = m[1].toLowerCase();
+    if (id === 'correct' && NEG.test(modelText.slice(0, m.index))) continue;
+    found.add(id === 'correct' ? 'ok' : id);
+  }
+  return found.size === 1 ? [...found][0] : null;
 }
 
 // ---------- COMMON ----------
