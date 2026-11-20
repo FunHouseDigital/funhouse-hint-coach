@@ -39,9 +39,42 @@ export function buildSheet() {
   return { text: L.join('\r\n'), count };
 }
 
+// The shorter sheet: each English line once (first-seen order of the full sheet), with every place it is used.
+export function buildUniqueSheet() {
+  const lines = new Map(); // English -> [keys]
+  for (const f of PACK_FILES) {
+    const p = JSON.parse(readFileSync(root + 'packs/' + f, 'utf8'));
+    for (const [id, h] of Object.entries(p.hints)) h.en.forEach((en, i) => { if (!lines.has(en)) lines.set(en, []); lines.get(en).push(`${f} | ${id} | ${i + 1}`); });
+    if ('st' in p.done) { if (!lines.has(p.done.en)) lines.set(p.done.en, []); lines.get(p.done.en).push(`${f} | done | -`); }
+  }
+  const L = [
+    'FunHouse Hint Coach - Sesotho translation sheet (short version: each English line once)',
+    '',
+    'What this is: every different English line the Hint Coach app can show. Some lines are used in more than one place.',
+    'Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under "Used at".',
+    '',
+    'Rules:',
+    '- Do not change the lines in square brackets, like [U12] or [t1-l1.json | lr_swapped | 2]. They tell us where your text goes.',
+    '- Keep {end} and {target} exactly as written. The app puts a square name there, like C3.',
+    '- If you are not sure, leave the Sesotho line empty. The app will show English for that line.',
+    '- All English lines are drafts too. Tell us if an English line is unclear.',
+    '',
+  ];
+  let n = 0;
+  for (const [en, keys] of lines) {
+    n++;
+    L.push(`[U${n}]`, 'English: ' + en, 'Used at:', ...keys.map((k) => '  [' + k + ']'), 'Sesotho: ', '');
+  }
+  L.push('End of sheet. Lines: ' + n, '');
+  return { text: L.join('\r\n'), count: n };
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const { text, count } = buildSheet();
   mkdirSync(root + 'docs', { recursive: true });
-  writeFileSync(root + 'docs/sesotho-translation-sheet.txt', '\uFEFF' + text, 'utf8');
-  console.log('Wrote docs/sesotho-translation-sheet.txt with ' + count + ' entries');
+  const full = buildSheet();
+  writeFileSync(root + 'docs/sesotho-translation-sheet.txt', '\uFEFF' + full.text, 'utf8');
+  console.log('Wrote docs/sesotho-translation-sheet.txt with ' + full.count + ' entries');
+  const uniq = buildUniqueSheet();
+  writeFileSync(root + 'docs/sesotho-unique-lines.txt', '\uFEFF' + uniq.text, 'utf8');
+  console.log('Wrote docs/sesotho-unique-lines.txt with ' + uniq.count + ' unique lines');
 }

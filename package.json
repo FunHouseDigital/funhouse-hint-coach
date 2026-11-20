@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "test": "node test.js && node tests/pinned-hashes.js && node tests/app-checks.js && node tests/counts-text.js && node tests/translation-sheet.js",
+    "test": "node test.js && node tests/pinned-hashes.js && node tests/app-checks.js && node tests/counts-text.js && node tests/translation-sheet.js && node tests/apply-sesotho.js",
     "fetch-model": "node scripts/fetch-model.js",
     "usb-pack": "node scripts/make-usb-pack.js"
   }
