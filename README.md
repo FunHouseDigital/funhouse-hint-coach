@@ -117,6 +117,81 @@ What `Start Hint Coach.cmd` is: one plain text file you can open in Notepad. The
 
 Host the folder on any web server (HTTPS, or `http://127.0.0.1`). Open it once while online and leave the tab open until the bottom of the help panel says **Ready offline.** (the model is about 491 MB). After that the app and /eval work with no network, in the same browser on the same laptop. If the server sends `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp`, the model can use more than one thread.
 
+### Copy this to another school
+
+For a teacher who has never seen Hint Coach.
+
+**What is on the USB pack** (about 521 MB in total):
+
+- `Start Hint Coach.cmd`: the start file. Double-click this one.
+- `README-USB.txt`: a short note.
+- `app`: the app, the helper model (about 491 MB) and the exercises. Do not change anything in it.
+
+**What the laptop needs:**
+
+- Windows 10 or Windows 11.
+- Chrome or Edge.
+- Nothing to install, and no admin password.
+- No internet once the files are copied.
+
+**Steps:**
+
+1. Copy the whole pack folder from the USB stick to the laptop, for example into Documents. Copy the folder, not single files.
+2. Open the copied folder and double-click **Start Hint Coach.cmd**.
+3. A black window opens. It says "FunHouse Hint Coach is running on this laptop only". Leave it open.
+4. The web browser opens the app by itself, at an address like `http://127.0.0.1:8765/app/`.
+5. The first screen says "Your answers stay on this laptop." Type a learner code like L1 and press Start.
+6. When you are done, close the browser tab, then close the black window. That stops Hint Coach.
+
+**If Windows or the school blocks the start file:**
+
+- **"Windows protected your PC"** (a blue box): Windows has not seen this file before. Click **More info**, then **Run anyway**.
+- **Antivirus removes or blocks the file**: some antivirus tools block any file that starts PowerShell. Restore it from the antivirus history and allow it, or ask IT to allow this one file. IT can read the notes at the top of the file in Notepad.
+- **The black window closes at once, or shows red text about a policy**: the school has turned PowerShell off. Ask IT to allow `Start Hint Coach.cmd`, or use the one-time-online way above.
+- More detail: see "If PowerShell is blocked or antivirus warns" above.
+
+**Check the start file is the real one (its sha256 fingerprint):**
+
+1. Open the pack folder. Click the address bar, type `powershell` and press Enter. A blue or black window opens in that folder.
+2. Type this and press Enter:
+
+   ```
+   Get-FileHash ".\Start Hint Coach.cmd" -Algorithm SHA256
+   ```
+
+3. Compare the long code under "Hash" with the value printed here, in this README:
+
+   `DFB4BFE04B707AA0344707BA661EB4B42617B49CEAD07FD6A81EE4D1C4DAC22E`
+
+4. If they match, the file is the real one. If they do not match, do not run it. Ask for a fresh copy.
+
+Another way, in a Command Prompt opened in the pack folder (it prints the same code in small letters):
+
+```
+CertUtil -hashfile "Start Hint Coach.cmd" SHA256
+```
+
+If `Start Hint Coach.cmd` ever changes, this README line must be updated in the same change.
+
+**What was tested on the build PC** (Windows 11 Pro, Chrome 157):
+
+- `Start Hint Coach.cmd` started from the pack folder on the PC's own disk. The black window appeared, and the PC's default browser (Chrome) opened the app.
+- The server answered only on 127.0.0.1, with the right file types and headers. It refused paths outside the folder and stopped when its window closed.
+- In headless Chrome (no window), through that server: all four exercise types, the sentence model, /eval, the CSV export and the clear buttons worked.
+- Emulated offline in headless Chrome: DevTools offline mode, only 127.0.0.1 reachable, and the server stopped. The app still worked from the offline cache.
+- `Get-FileHash` and `CertUtil -hashfile` both gave the sha256 above.
+
+**Not tested yet:**
+
+- Edge.
+- A real 4 GB laptop.
+- A locked-down school laptop, or one with PowerShell turned off.
+- Real airplane mode.
+- The SmartScreen box on a fresh laptop. The build PC never showed it, because the file was made there and not copied in.
+- Antivirus products. The build PC's own antivirus raised no warning, but for the same reason that proves little.
+- Copying the pack to another PC, and running it straight from the USB stick.
+- Windows 10.
+
 ### Airplane-mode check (do this on the real laptop)
 
 Only this check proves the laptop works with no network. The build PC test is an emulation (see below).
