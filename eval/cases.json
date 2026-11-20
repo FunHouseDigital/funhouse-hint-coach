@@ -1,0 +1,514 @@
+[
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F F R F F",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F F R F",
+    "expect": "turn_moves",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F F L F F",
+    "expect": "lr_swapped",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F F R F F F",
+    "expect": "went_too_far",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F R F F",
+    "expect": "stopped_short",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F F F F F F R F",
+    "expect": "off_grid",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e1",
+    "attempt": "F R L F R F F",
+    "expect": "too_long",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e2",
+    "attempt": "F R F F",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e2",
+    "attempt": "F R F",
+    "expect": "turn_moves",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e2",
+    "attempt": "F L F F",
+    "expect": "lr_swapped",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e3",
+    "attempt": "F F F",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e3",
+    "attempt": "F F",
+    "expect": "stopped_short",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t1-l1",
+    "exercise": "t1-e3",
+    "attempt": "F F F F",
+    "expect": "went_too_far",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e1",
+    "attempt": "F3",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e1",
+    "attempt": "F F F",
+    "expect": "too_long",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e1",
+    "attempt": "F4",
+    "expect": "went_too_far",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e1",
+    "attempt": "F2",
+    "expect": "stopped_short",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e2",
+    "attempt": "F2 R F2",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e2",
+    "attempt": "F2 L F2",
+    "expect": "lr_swapped",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e2",
+    "attempt": "F3 R F2",
+    "expect": "went_too_far",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e2",
+    "attempt": "F2 R F3",
+    "expect": "went_too_far",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e3",
+    "attempt": "F3 R F3 R F3 R F3",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e3",
+    "attempt": "F F F R F F F R F F F R F F F",
+    "expect": "too_long",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e3",
+    "attempt": "F3 R F3 R F3 R F2",
+    "expect": "stopped_short",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e3",
+    "attempt": "F3 R F3 R F3 R F3 R",
+    "expect": "wrong_facing",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t2-l1",
+    "exercise": "t2-e3",
+    "attempt": "F3 R F3 R F3",
+    "expect": "no_match",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If the whistle blows, then stop.",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If the whistle blows then we freeze.",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "if the whistle blows, then everybody stands still",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If I stop, then the whistle blows.",
+    "expect": "swapped_if_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If we freeze then the whistle blows",
+    "expect": "swapped_if_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If the whistle blows.",
+    "expect": "missing_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "The whistle blows and we stop.",
+    "expect": "missing_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If the whistle blows, then walk faster.",
+    "expect": "wrong_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e1",
+    "attempt": "If the whistle blows then we run.",
+    "expect": "wrong_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e2",
+    "attempt": "If there is no whistle, then we keep walking.",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e2",
+    "attempt": "If there is no whistle then carry on",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e2",
+    "attempt": "If there is no whistle, then stop.",
+    "expect": "stops_anyway",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e2",
+    "attempt": "If there is no whistle, then we freeze",
+    "expect": "stops_anyway",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "t3-l1",
+    "exercise": "t3-e2",
+    "attempt": "If there is no whistle.",
+    "expect": "missing_then",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e1",
+    "attempt": {
+      "keyboard": "INPUT",
+      "mouse": "INPUT",
+      "microphone": "INPUT",
+      "barcode_scanner": "INPUT",
+      "processor": "PROCESSING",
+      "memory": "PROCESSING",
+      "screen": "OUTPUT",
+      "speaker": "OUTPUT",
+      "printer": "OUTPUT",
+      "storage_drive": "STORAGE",
+      "memory_card": "STORAGE",
+      "usb_stick": "STORAGE"
+    },
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e1",
+    "attempt": {
+      "keyboard": "INPUT",
+      "mouse": "INPUT",
+      "microphone": "INPUT",
+      "barcode_scanner": "INPUT",
+      "processor": "PROCESSING",
+      "memory": "PROCESSING",
+      "screen": "OUTPUT",
+      "speaker": "OUTPUT",
+      "printer": "OUTPUT",
+      "storage_drive": "OUTPUT",
+      "memory_card": "OUTPUT",
+      "usb_stick": "OUTPUT"
+    },
+    "expect": "storage_as_output",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e1",
+    "attempt": {
+      "keyboard": "OUTPUT",
+      "mouse": "INPUT",
+      "microphone": "OUTPUT",
+      "barcode_scanner": "INPUT",
+      "processor": "PROCESSING",
+      "memory": "PROCESSING",
+      "screen": "OUTPUT",
+      "speaker": "INPUT",
+      "printer": "INPUT",
+      "storage_drive": "STORAGE",
+      "memory_card": "STORAGE",
+      "usb_stick": "STORAGE"
+    },
+    "expect": "input_output_swapped",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e1",
+    "attempt": {
+      "keyboard": "INPUT",
+      "mouse": "INPUT",
+      "microphone": "INPUT",
+      "barcode_scanner": "INPUT",
+      "processor": "STORAGE",
+      "memory": "STORAGE",
+      "screen": "OUTPUT",
+      "speaker": "OUTPUT",
+      "printer": "OUTPUT",
+      "storage_drive": "STORAGE",
+      "memory_card": "STORAGE",
+      "usb_stick": "STORAGE"
+    },
+    "expect": "processing_unclear",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e1",
+    "attempt": {
+      "keyboard": "STORAGE",
+      "mouse": "PROCESSING",
+      "microphone": "STORAGE",
+      "barcode_scanner": "INPUT",
+      "processor": "PROCESSING",
+      "memory": "PROCESSING",
+      "screen": "OUTPUT",
+      "speaker": "OUTPUT",
+      "printer": "OUTPUT",
+      "storage_drive": "STORAGE",
+      "memory_card": "STORAGE",
+      "usb_stick": "INPUT"
+    },
+    "expect": "mixed",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e2",
+    "attempt": {
+      "x": -155,
+      "y": 0
+    },
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e2",
+    "attempt": {
+      "x": 45,
+      "y": 0
+    },
+    "expect": "distance_not_coordinate",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e2",
+    "attempt": {
+      "x": -125,
+      "y": 0
+    },
+    "expect": "counted_all_moves",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e2",
+    "attempt": {
+      "x": -155,
+      "y": 15
+    },
+    "expect": "forgot_down",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e2",
+    "attempt": {
+      "x": -100,
+      "y": 0
+    },
+    "expect": "no_match_predict",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e3",
+    "attempt": {
+      "x": -140,
+      "y": 0
+    },
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e3",
+    "attempt": {
+      "x": 60,
+      "y": 0
+    },
+    "expect": "distance_not_coordinate",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e3",
+    "attempt": {
+      "x": -110,
+      "y": 0
+    },
+    "expect": "counted_all_moves",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e3",
+    "attempt": {
+      "x": -140,
+      "y": 15
+    },
+    "expect": "forgot_down",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is the price and the output is the slip.",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is the barcode and the output is a receipt.",
+    "expect": "ok",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is the slip and the output is the price.",
+    "expect": "swapped_input_output",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is the price and the output is the sales book.",
+    "expect": "storage_as_output",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is the till adds up and the output is the slip.",
+    "expect": "processing_as_input",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  },
+  {
+    "pack": "g910-t1-l1",
+    "exercise": "g910-e4",
+    "attempt": "In a till sale, the input is money and the output is happy.",
+    "expect": "no_match",
+    "source": "synthetic, written by the author for testing. Replace with real learner attempts after the supervised session."
+  }
+]

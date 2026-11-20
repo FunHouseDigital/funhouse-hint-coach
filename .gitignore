@@ -1,0 +1,5 @@
+models/
+dist/
+node_modules/
+*.gguf
+.test-tmp/

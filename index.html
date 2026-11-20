@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FunHouse Hint Coach</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#14213d">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <h1>Hint Coach</h1>
+  <form id="codeForm" class="code" autocomplete="off">
+    <label for="code">Learner code</label>
+    <input id="code" inputmode="text" maxlength="8" placeholder="L1" aria-describedby="codeMsg">
+    <button type="submit">Start</button>
+    <span id="codeMsg" role="status"></span>
+  </form>
+  <div class="tools">
+    <label for="exSel">Exercise</label>
+    <select id="exSel" disabled></select>
+    <div class="seg" role="group" aria-label="Hint language">
+      <button type="button" id="langEn" aria-pressed="true">English</button>
+      <button type="button" id="langSt" aria-pressed="false">Sesotho</button>
+    </div>
+    <button type="button" id="exportBtn" disabled>Export session notes</button>
+  </div>
+</header>
+
+<main id="main" hidden>
+  <section class="work" aria-labelledby="exTitle">
+    <h2 id="exTitle"></h2>
+    <p id="exPrompt" class="prompt"></p>
+    <div id="screen"></div>
+    <div class="actions">
+      <button type="button" id="runBtn" hidden>Run my route</button>
+      <button type="button" id="hintBtn" class="primary">Get hint</button>
+    </div>
+  </section>
+
+  <aside class="side" aria-label="Help">
+    <div id="status" role="status" aria-live="polite" class="status"></div>
+    <div id="hintBox" class="hintbox" aria-live="polite"></div>
+    <div class="stuck" id="stuck">
+      <strong>Stuck?</strong>
+      <ol>
+        <li>Try alone.</li>
+        <li>Then hint.</li>
+        <li>Then ask your partner.</li>
+        <li>Then ask your facilitator.</li>
+      </ol>
+    </div>
+    <p class="small"><a href="eval/">Eval page (synthetic cases)</a> <span id="cacheMsg"></span></p>
+  </aside>
+</main>
+
+<p id="welcome" class="welcome">Facilitator: type an anonymous learner code like L1, then press Start. No names.</p>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

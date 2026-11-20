@@ -1,0 +1,9 @@
+The exercise packs in this folder (packs/*.json) are licensed under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Attribution: FunHouse Digital. Adapted from FunHouse facilitator cards.
+All hints are drafts and need a teacher check. Sesotho fields are empty.
+
+(This file sits at the repo root, not in packs/, because the owner's test.js reads every file in packs/ as JSON.)

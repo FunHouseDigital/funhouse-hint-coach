@@ -1,0 +1,189 @@
+{
+  "lesson": "T1 L1",
+  "title": "Be the robot: one step at a time",
+  "grades": "3 and 4",
+  "source": "T1 L1 facilitator card (Teach and Unplugged stations)",
+  "status": "DRAFT. Hints adapted from the facilitator card wording. Need a teacher check. Sesotho fields are empty until a Sesotho speaker has written them.",
+  "done": {
+    "en": "Well done. Tell your partner how you know your robot ends on the right square.",
+    "st": ""
+  },
+  "exercises": [
+    {
+      "id": "t1-e1",
+      "type": "route",
+      "title": "Walk to the water tank",
+      "prompt": "Thuso starts on the Gate (A1) facing North. Build a route that ends on the Water tank (C3). Use Forward, Turn Left and Turn Right. Use 5 cards or fewer.",
+      "grid": {
+        "cols": 4,
+        "rows": 4
+      },
+      "start": {
+        "sq": "A1",
+        "facing": "N"
+      },
+      "target": {
+        "sq": "C3"
+      },
+      "allowRepeat": false,
+      "maxCards": 5
+    },
+    {
+      "id": "t1-e2",
+      "type": "route",
+      "title": "Walk to C2",
+      "prompt": "Thuso starts on A1 facing North. Build a route that ends on C2. Use 4 cards or fewer.",
+      "grid": {
+        "cols": 4,
+        "rows": 4
+      },
+      "start": {
+        "sq": "A1",
+        "facing": "N"
+      },
+      "target": {
+        "sq": "C2"
+      },
+      "allowRepeat": false,
+      "maxCards": 4
+    },
+    {
+      "id": "t1-e3",
+      "type": "route",
+      "title": "Straight up",
+      "prompt": "Thuso starts on A1 facing North. Build a route that ends on A4 using only Forward cards.",
+      "grid": {
+        "cols": 4,
+        "rows": 4
+      },
+      "start": {
+        "sq": "A1",
+        "facing": "N"
+      },
+      "target": {
+        "sq": "A4"
+      },
+      "allowRepeat": false,
+      "maxCards": 3
+    }
+  ],
+  "hints": {
+    "turn_moves": {
+      "desc": "Thinks a turn moves the robot to a new square.",
+      "en": [
+        "Look at your Turn card. After a turn, did the robot move to a new square?",
+        "Walk your cards on the grid and put a finger on the cap after each card. Which cards moved it?",
+        "A turn spins the robot on the spot. It stays on the same square. Only Forward moves it to a new square."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "lr_swapped": {
+      "desc": "Mixes up the robot's left and right.",
+      "en": [
+        "Stand behind the robot so left and right match. Which way does your turn card send it?",
+        "The robot's right, not yours. Face the same way as the robot and try the turn again.",
+        "Check each turn card. Would the other turn card keep the robot on the path?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "stopped_short": {
+      "desc": "Route stops one square before the goal.",
+      "en": [
+        "Your robot ends on {end}. The goal is {target}. Walk your cards again, one at a time.",
+        "Count the squares the robot steps ON, not the one it starts on.",
+        "Your route stops before the goal. Is there a Forward you can add?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "went_too_far": {
+      "desc": "Route goes one square past the goal.",
+      "en": [
+        "Your robot ends on {end}, past the goal. Walk your cards again, one at a time.",
+        "Count the squares the robot steps ON. Where should it stop?",
+        "Your route goes one step too far. Is there a Forward you can take away?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "off_grid": {
+      "desc": "Robot walks off the grid.",
+      "en": [
+        "Your robot walked off the grid. Walk your cards with a finger and say each one.",
+        "After each turn, which way is the robot facing now? Say it out loud.",
+        "Find the card where the robot leaves the grid. Which way was it facing just before?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "too_long": {
+      "desc": "Route works but uses more cards than needed.",
+      "en": [
+        "Your robot reaches the goal. Well done. Can you do it with fewer cards?",
+        "Which cards could you take away and still reach {target}?",
+        "Where does the path bend? A route with one turn in it can be shorter."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "no_match": {
+      "desc": "Route ends somewhere unexpected.",
+      "en": [
+        "Your robot ends on {end}. The goal is {target}.",
+        "Say the first step out loud. What comes next?",
+        "Walk the route on the grid. Where does the path bend, and what did the robot do there?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "wrong_facing": {
+      "desc": "Right square, wrong direction.",
+      "en": [
+        "Your robot is on the right square. Which way is it facing?",
+        "The goal says which way the robot must face. Check your last card.",
+        "Walk your route and say the way the robot faces after every card."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "generic": {
+      "desc": "Any answer the coach cannot place.",
+      "en": [
+        "Try again slowly. What does the exercise ask you to do first?",
+        "Say the first step out loud. What comes next?",
+        "Ask your partner what they think. If you are still stuck, ask your facilitator."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    }
+  }
+}

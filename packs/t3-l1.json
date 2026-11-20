@@ -1,0 +1,117 @@
+{
+  "lesson": "T3 L1",
+  "title": "If the whistle blows, stop",
+  "grades": "3 and 4",
+  "source": "T3 L1 facilitator card (Teach and Unplugged stations)",
+  "status": "DRAFT. Hints adapted from the facilitator card wording. Need a teacher check. Sesotho fields are empty until a Sesotho speaker has written them.",
+  "done": {
+    "en": "Well done. Tell your partner another if-then rule from home or school.",
+    "st": ""
+  },
+  "exercises": [
+    {
+      "id": "t3-e1",
+      "type": "sentence",
+      "baseline": "whistle_if_then",
+      "title": "The whistle rule",
+      "prompt": "Write the soccer rule in one sentence. Start with If, and use the word then.",
+      "labels": [
+        "swapped_if_then",
+        "missing_then",
+        "wrong_then"
+      ]
+    },
+    {
+      "id": "t3-e2",
+      "type": "sentence",
+      "baseline": "no_whistle",
+      "title": "No whistle",
+      "prompt": "Finish the rule for when there is NO whistle: \"If there is no whistle, then ...\"",
+      "labels": [
+        "stops_anyway",
+        "missing_then",
+        "no_match"
+      ]
+    }
+  ],
+  "hints": {
+    "swapped_if_then": {
+      "desc": "Puts the action in the IF part and the whistle in the THEN part.",
+      "en": [
+        "IF is what happens first, the signal. THEN is what we do about it.",
+        "Which part of your sentence is the whistle? Point to it. Is that the IF or the THEN?",
+        "Start again with: If the ___ , then we ___ ."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "missing_then": {
+      "desc": "Sentence has no clear IF part and THEN part.",
+      "en": [
+        "Does your sentence have an IF part and a THEN part? Point to each.",
+        "What do the players do when the whistle blows?",
+        "Write it like this: If the whistle blows, then ... What do you do?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "wrong_then": {
+      "desc": "THEN part is not what players do when the whistle blows.",
+      "en": [
+        "Act it out. The whistle blows. What do you do?",
+        "What is the rule on the soccer field when the referee blows?",
+        "The players ... when the whistle blows. Finish that sentence."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "stops_anyway": {
+      "desc": "Says players stop even when there is no whistle.",
+      "en": [
+        "What did you do when there was no whistle?",
+        "If there is no whistle, does the rule tell you to stop?",
+        "No whistle means nothing tells you to stop. What do you keep doing?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "no_match": {
+      "desc": "Answer does not say what happens without the whistle.",
+      "en": [
+        "What happens on the field when there is no whistle?",
+        "Walk on the spot. No whistle. What are you doing?",
+        "Finish it with what the players keep doing: If there is no whistle, then ..."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "generic": {
+      "desc": "Any answer the coach cannot place.",
+      "en": [
+        "Try again slowly. What does the exercise ask you to do first?",
+        "Say the first step out loud. What comes next?",
+        "Ask your partner what they think. If you are still stuck, ask your facilitator."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    }
+  }
+}

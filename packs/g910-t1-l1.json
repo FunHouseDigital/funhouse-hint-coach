@@ -1,0 +1,307 @@
+{
+  "lesson": "G910 T1 L1",
+  "title": "The information cycle: input, processing, output, storage",
+  "grades": "9 and 10",
+  "source": "G910 T1 L1 facilitator card (Unplugged part sort, Device first program, exit ticket)",
+  "status": "DRAFT. Hints adapted from the facilitator card wording. Need a teacher check. Sesotho fields are empty until a Sesotho speaker has written them.",
+  "done": {
+    "en": "Well done. Explain your answer to your partner in your own words.",
+    "st": ""
+  },
+  "exercises": [
+    {
+      "id": "g910-e1",
+      "type": "sort",
+      "title": "Sort the parts by their job",
+      "prompt": "Put each part card on the right mat: INPUT, PROCESSING, OUTPUT or STORAGE.",
+      "bins": [
+        "INPUT",
+        "PROCESSING",
+        "OUTPUT",
+        "STORAGE"
+      ],
+      "passMark": 9,
+      "items": [
+        {
+          "id": "keyboard",
+          "label": "keyboard",
+          "bin": "INPUT"
+        },
+        {
+          "id": "mouse",
+          "label": "mouse",
+          "bin": "INPUT"
+        },
+        {
+          "id": "microphone",
+          "label": "microphone",
+          "bin": "INPUT"
+        },
+        {
+          "id": "barcode_scanner",
+          "label": "barcode scanner",
+          "bin": "INPUT"
+        },
+        {
+          "id": "processor",
+          "label": "processor",
+          "bin": "PROCESSING"
+        },
+        {
+          "id": "memory",
+          "label": "memory",
+          "bin": "PROCESSING"
+        },
+        {
+          "id": "screen",
+          "label": "screen",
+          "bin": "OUTPUT"
+        },
+        {
+          "id": "speaker",
+          "label": "speaker",
+          "bin": "OUTPUT"
+        },
+        {
+          "id": "printer",
+          "label": "printer",
+          "bin": "OUTPUT"
+        },
+        {
+          "id": "storage_drive",
+          "label": "storage drive",
+          "bin": "STORAGE"
+        },
+        {
+          "id": "memory_card",
+          "label": "memory card",
+          "bin": "STORAGE"
+        },
+        {
+          "id": "usb_stick",
+          "label": "USB stick",
+          "bin": "STORAGE"
+        }
+      ]
+    },
+    {
+      "id": "g910-e2",
+      "type": "predict",
+      "title": "First program: the small hill",
+      "prompt": "The ball starts at x -200, y 0. The blocks are: point in direction 90, move 15 steps, point in direction 0, move 15, point in direction 90, move 15, point in direction 180, move 15, point in direction 90, move 15. Where does the ball end? Give x and y.",
+      "answer": {
+        "x": -155,
+        "y": 0
+      },
+      "patterns": [
+        {
+          "id": "distance_not_coordinate",
+          "x": 45
+        },
+        {
+          "id": "counted_all_moves",
+          "x": -125
+        },
+        {
+          "id": "forgot_down",
+          "y": 15
+        }
+      ]
+    },
+    {
+      "id": "g910-e3",
+      "type": "predict",
+      "title": "The CAPS pattern",
+      "prompt": "The ball starts at x -200, y 0. The moves are: Forward 15, Up 15, Forward 15, Forward 15, Down 15, Forward 15 (Forward is direction 90, Up is 0, Down is 180). Where does the ball end? Give x and y.",
+      "answer": {
+        "x": -140,
+        "y": 0
+      },
+      "patterns": [
+        {
+          "id": "distance_not_coordinate",
+          "x": 60
+        },
+        {
+          "id": "counted_all_moves",
+          "x": -110
+        },
+        {
+          "id": "forgot_down",
+          "y": 15
+        }
+      ]
+    },
+    {
+      "id": "g910-e4",
+      "type": "sentence",
+      "baseline": "till_sale",
+      "title": "Till sale",
+      "prompt": "Complete the sentence in your own words: \"In a till sale, the input is ____ and the output is ____ .\"",
+      "labels": [
+        "swapped_input_output",
+        "storage_as_output",
+        "processing_as_input",
+        "no_match"
+      ]
+    }
+  ],
+  "hints": {
+    "storage_as_output": {
+      "desc": "Puts something that keeps information in OUTPUT, or something that shows it in STORAGE.",
+      "en": [
+        "What goes in? What comes out? Where is it kept?",
+        "A part that keeps things for later does a different job from a part that shows things.",
+        "Look at the cards on OUTPUT. Which of them keep things instead of showing them?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "input_output_swapped": {
+      "desc": "Mixes up what goes in with what comes out.",
+      "en": [
+        "What goes in? What comes out? Where is it kept?",
+        "Pick one card from INPUT. Does it send something in, or show something out?",
+        "Check the cards on INPUT and OUTPUT. Swap any that are on the wrong side."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "processing_unclear": {
+      "desc": "Unsure which parts do the working.",
+      "en": [
+        "What goes in? What comes out? Where is it kept?",
+        "Which part does the working between input and output?",
+        "Look at the cards left over. Which ones work on information?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "mixed": {
+      "desc": "Several cards are on the wrong mats.",
+      "en": [
+        "What goes in? What comes out? Where is it kept?",
+        "Pick one card you are sure about and say its job in one sentence.",
+        "Move one card you are unsure about and ask your partner what they think."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "distance_not_coordinate": {
+      "desc": "Gave how far the ball moved instead of where it ends.",
+      "en": [
+        "You gave how far the ball moved. The question asks where it ends on the stage.",
+        "Where did the ball start? Begin from that x number.",
+        "Add the distance moved to the starting x. What do you get?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "counted_all_moves": {
+      "desc": "Counted every move as a move to the right.",
+      "en": [
+        "Look at each block. Which way does the ball face for each move?",
+        "Which blocks point the ball up or down, and which point it right?",
+        "Only the moves to the right change x. Count just those."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "forgot_down": {
+      "desc": "Left out the effect of the Down move.",
+      "en": [
+        "Check the y number again. Go through every block in order.",
+        "What does the Down block do to y?",
+        "Up 15 and Down 15. Where does y end?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "no_match_predict": {
+      "desc": "Answer does not match any common mistake.",
+      "en": [
+        "Walk the blocks one by one and write x and y after each.",
+        "Use the planning strip. Write the position after every move.",
+        "Which blocks change x? Which blocks change y?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "no_match": {
+      "desc": "Till sentence does not match any common mistake.",
+      "en": [
+        "What goes in? What comes out? Where is it kept?",
+        "Say the sale out loud. What does the assistant do first? What do you get at the end?",
+        "Fill in the first blank with what goes into the till and the second with what comes out."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "swapped_input_output": {
+      "desc": "Writes what comes out as the input and what goes in as the output.",
+      "en": [
+        "What goes in? What comes out?",
+        "The input goes into the till. Does the slip go in, or come out?",
+        "Swap your two answers and read the sentence again."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "processing_as_input": {
+      "desc": "Names the till's working as the input.",
+      "en": [
+        "What goes in? Say what the assistant types or scans.",
+        "Adding up happens inside the till. What does the assistant give the till first?",
+        "Think of the barcode or the price. Which one goes in?"
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "generic": {
+      "desc": "Any answer the coach cannot place.",
+      "en": [
+        "Try again slowly. What does the exercise ask you to do first?",
+        "Say the first step out loud. What comes next?",
+        "Ask your partner what they think. If you are still stuck, ask your facilitator."
+      ],
+      "st": [
+        "",
+        "",
+        ""
+      ]
+    }
+  }
+}
