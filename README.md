@@ -29,6 +29,20 @@ It runs in the browser on the laptop itself. It needs no internet after the firs
 - **Export session notes** builds a CSV on the laptop (no network) with: learner code, exercise id, event (hint, done, ask_facilitator), hint level, diagnosis, helpful / not helpful, and how it was checked (code, model or baseline fallback). No free text from the learner goes into the CSV.
 - The offline cache (service worker) holds only app files, packs, eval cases and the model. These are not learner data, and the clear buttons do not touch them.
 
+### What is kept after the tab closes
+
+| Thing | Where it lives | Closed tab | Browser restart |
+|---|---|---|---|
+| Session notes (learner code, hints, ratings) | page memory (`Session` in `js/app.js`) | gone | gone |
+| Hint progress (level, diagnosis per exercise) | page memory (`ladder` in `js/app.js`) | gone | gone |
+| Language choice, learner code typed | page memory | gone (back to English) | gone |
+| /eval results | page memory (`report` in `eval/eval.js`) | gone | gone |
+| App files, packs, eval cases, model | Cache API (`hint-coach-shell-v3`, `hint-coach-model-74a4da8c`) | kept | kept |
+| Service worker | browser service worker registration | kept | kept |
+| Exported CSV, JSON or counts .txt | the Downloads folder (only when someone presses a download button) | kept | kept |
+
+The app uses no localStorage, sessionStorage, IndexedDB, cookies or OPFS. wllama has OPFS cache code, but only for loading from a URL or Hugging Face, which this app never calls. To save /eval results, press **Download full report (JSON)** or **Download counts (.txt)** before closing the tab. The .txt holds only counts, timings and device facts, never case texts or answers.
+
 ## Model and libraries
 
 | Item | Value |
@@ -148,7 +162,7 @@ npm test
 - Every Sesotho field in the packs is empty on purpose. The app shows English with a tag until a Sesotho speaker writes them.
 - The eval cases in `eval/cases.json` are **synthetic**, written by the author. They are not learner data. Do not quote /eval results as learner results.
 - No accuracy or speed numbers are published here. Run /eval on the target laptop and use only those.
-- The first sentence exercise loads the model (about 491 MB) into memory. On a 4 GB laptop close other apps first. ESTIMATE of peak memory for the browser tab, not measured: about 1.0 to 1.5 GB (weights about 470 MB in the model worker, up to 491 MB more if the browser keeps the loaded file in memory, KV cache about 13 MB at 1024 tokens, compute buffers about 150 to 300 MB, tab and page about 150 to 250 MB). Use the /eval page on the real laptop for the real figure where the browser reports it.
+- The first sentence exercise loads the model (about 491 MB) into memory. On a 4 GB laptop close other apps first. Measured on the build PC only (this PC, not the school laptop; headless Chrome, 4 threads, private memory of each Chrome process): the Hint Coach tab used about 30 MB before the model, up to about 1,040 MB while loading the model and answering, and about 830 MB after one hint. All Chrome processes together peaked at about 1,220 MB. The model is read from the offline cache as a disk-backed file, so the page does not keep a second full copy. Use the /eval page on the real laptop for its own figure.
 - Very old browsers fall back to the slower compat build. Firefox without JSPI runs on the main build without compat, as wllama recommends.
 - Session notes are lost if the tab is closed before export.
 - The G910 predict exercises assume the ball starts at x -200, y 0 (see the pack notes). Confirm against the real starter file.
