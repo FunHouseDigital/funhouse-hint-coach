@@ -60,9 +60,9 @@ function summary() {
   if (s.code) lines.push(['Route, sort, predict (code)', `${s.code.pass} of ${s.code.total} pass`]);
   if (s.sentence) {
     const t = s.sentence;
-    lines.push(['Sentence: model', `${t.modelCorrect} of ${t.total} (${pct(t.modelCorrect, t.total)}), unclear replies ${t.modelUnclear}`]);
-    lines.push(['Sentence: keyword baseline', `${t.keywordCorrect} of ${t.total} (${pct(t.keywordCorrect, t.total)})`]);
-    lines.push(['Sentence: app (model, keyword when unclear)', `${t.appCorrect} of ${t.total} (${pct(t.appCorrect, t.total)})`]);
+    lines.push(['Sentence cases', `model ${t.model.correct} of ${t.total}, keyword baseline ${t.keyword.correct} of ${t.total}`]);
+    lines.push(['Model replies it could not read', `${t.model.unclear} of ${t.total}`]);
+    lines.push(['App result (model, keyword when unclear)', `${t.app.correct} of ${t.total}`]);
     lines.push(['Model call ms: median / slowest', `${t.medianMs?.toFixed(0)} / ${t.slowestMs?.toFixed(0)}`]);
     lines.push(['Model load ms (one time)', t.loadMs?.toFixed(0)]);
     lines.push(['Peak memory', t.peakMemory]);
@@ -70,7 +70,6 @@ function summary() {
   const body = $('sum').tBodies[0];
   body.replaceChildren(...lines.map(([k, v]) => { const tr = document.createElement('tr'); const th = document.createElement('th'); th.textContent = k; const td = document.createElement('td'); td.textContent = v; tr.append(th, td); return tr; }));
 }
-const pct = (a, b) => (b ? Math.round((a / b) * 100) + '%' : '-');
 
 async function setup() {
   status('Loading cases...');
@@ -130,14 +129,14 @@ $('runSent').addEventListener('click', async () => {
       if (choice === c.expect) modelCorrect++;
       if (kw === c.expect) keywordCorrect++;
       if (app === c.expect) appCorrect++;
-      report.sentenceCases.push({ n, pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, keyword: kw, model: choice, modelText: text, app, ms: Math.round(ms) });
+      report.sentenceCases.push({ n, pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, keyword: kw, keywordCorrect: kw === c.expect, model: choice, modelCorrect: choice === c.expect, modelText: text, app, appCorrect: app === c.expect, ms: Math.round(ms) });
       row([n, c.exercise, c.attempt, c.expect, kw, choice ?? 'unclear', text, Math.round(ms)], ['', '', '', '', kw === c.expect ? 'pass' : 'fail', choice === c.expect ? 'pass' : 'fail']);
     }
     const ua = await uaMemory();
     const peakMemory = ua != null ? `${(ua / 1e6).toFixed(0)} MB (measureUserAgentSpecificMemory, after run)`
       : peakHeap != null ? `${(peakHeap / 1e6).toFixed(0)} MB (performance.memory, main thread JS heap only)`
       : 'not reported';
-    report.summary.sentence = { total: list.length, modelCorrect, modelUnclear, keywordCorrect, appCorrect, medianMs: median(times), slowestMs: Math.max(...times), loadMs, peakMemory, peakJsHeapBytes: peakHeap, uaMemoryBytes: ua };
+    report.summary.sentence = { total: list.length, model: { correct: modelCorrect, total: list.length, unclear: modelUnclear }, keyword: { correct: keywordCorrect, total: list.length }, app: { correct: appCorrect, total: list.length }, medianMs: median(times), slowestMs: Math.max(...times), loadMs, peakMemory, peakJsHeapBytes: peakHeap, uaMemoryBytes: ua };
     $('dl').disabled = false;
     summary();
     status('Sentence cases done.');
