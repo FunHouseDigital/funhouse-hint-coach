@@ -260,10 +260,11 @@ function renderHint() {
     rate('helpful'), rate('not helpful')));
 }
 
-function showDone() {
-  once('done', { event: 'done' });
-  $('hintBox').replaceChildren(el('p', { class: 'done' }, doneMessage(cur.pack, lang)),
-    lang === 'st' && !cur.pack.done.st ? el('span', { class: 'tag' }, 'English until the Sesotho is checked') : null);
+function showDone(result) {
+  once('done', { event: 'done', checkedBy: result.checkedBy });
+  const box = $('hintBox');
+  box.replaceChildren(el('p', { class: 'done' }, doneMessage(cur.pack, lang)));
+  if (lang === 'st' && !cur.pack.done.st) box.append(el('span', { class: 'tag' }, 'English until the Sesotho is checked'));
 }
 function showAsk(result) {
   once('ask', { event: 'ask_facilitator', diagnosis: ladder.diag, checkedBy: result.checkedBy });

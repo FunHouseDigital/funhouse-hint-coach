@@ -8,7 +8,7 @@ let loading = null;
 export const info = { loaded: false, threads: 1, multithread: false, bytes: MODEL.bytes, file: MODEL.path.split('/').pop() };
 
 async function fetchModelBlob(onProgress) {
-  const res = await fetch(MODEL.path);
+  const res = await fetch(new URL('../' + MODEL.path, import.meta.url));
   if (!res.ok) throw new Error('Model file not found: ' + MODEL.path + ' (run: node scripts/fetch-model.js)');
   const total = Number(res.headers.get('content-length')) || MODEL.bytes;
   const reader = res.body.getReader();
@@ -29,7 +29,11 @@ export function ensureModel(onProgress) {
   if (loading) return loading;
   loading = (async () => {
     const w = new Wllama({ default: new URL('../vendor/wllama/wllama.wasm', import.meta.url).href }, { suppressNativeLog: true });
-    w.setCompat(null); // never fetch fallback files from a CDN
+    // Older browsers without JSPI or Memory64 get the compat build, served locally (never the CDN default).
+    w.setCompat({
+      worker: new URL('../vendor/wllama-compat/wllama.js', import.meta.url).href,
+      wasm: new URL('../vendor/wllama-compat/wllama.wasm', import.meta.url).href,
+    });
     const blob = await fetchModelBlob(onProgress);
     const isolated = self.crossOriginIsolated === true;
     const n_threads = isolated ? Math.max(1, Math.min(4, Math.floor((navigator.hardwareConcurrency || 2) / 2))) : 1;

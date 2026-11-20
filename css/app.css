@@ -82,6 +82,8 @@ progress { width: 100%; height: 1.2rem; }
 .mat .name { font-weight: 800; display: block; margin-bottom: .2rem; }
 .mat .in { display: flex; flex-wrap: wrap; gap: .25rem; }
 .part { min-height: 44px; padding: .1rem .5rem; border-radius: 8px; border: 2px solid var(--brand); background: #fff; }
+.mat .part { font-size: .8rem; min-height: 40px; padding: 0 .35rem; }
+.mat { min-height: 5.5rem; }
 .part[aria-pressed="true"] { background: #fde68a; box-shadow: 0 0 0 3px var(--focus); }
 
 /* predict + sentence */

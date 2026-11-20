@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hint Coach eval (synthetic cases)</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+  .wrap { padding: .6rem 1rem; }
+  table { border-collapse: collapse; margin: .5rem 0; font-size: .85rem; }
+  th, td { border: 1px solid var(--line); padding: .15rem .4rem; text-align: left; vertical-align: top; }
+  .pass { color: var(--good); font-weight: 700; }
+  .fail { color: var(--bad); font-weight: 700; }
+  .warn { background: #fffbeb; border: 2px solid #b45309; border-radius: 10px; padding: .4rem .8rem; }
+  .sum td, .sum th { font-size: 1rem; }
+</style>
+</head>
+<body>
+<header class="top"><h1>Eval: synthetic cases</h1><a href="../" style="color:#fff">Back to the app</a></header>
+<div class="wrap">
+  <p class="warn">All cases in eval/cases.json are <strong>synthetic</strong>, written by the author for testing. They are not learner data. Numbers here are only valid for the laptop and browser that ran them.</p>
+  <div class="actions">
+    <button type="button" id="runCode" class="primary">1. Check route, sort and predict</button>
+    <button type="button" id="runSent" class="primary">2. Run sentence cases (model and keyword)</button>
+    <button type="button" id="dl" disabled>Download full report (JSON)</button>
+  </div>
+  <div id="status" role="status" aria-live="polite" class="status"></div>
+  <h2>Summary</h2>
+  <table class="sum" id="sum"><tbody></tbody></table>
+  <h2>Cases</h2>
+  <table id="cases"><thead><tr><th>#</th><th>Exercise</th><th>Attempt</th><th>Expected</th><th>Code / keyword</th><th>Model</th><th>Model reply</th><th>ms</th></tr></thead><tbody></tbody></table>
+</div>
+<script type="module" src="eval.js"></script>
+</body>
+</html>
