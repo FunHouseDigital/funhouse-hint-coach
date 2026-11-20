@@ -2,11 +2,13 @@
 // CPU only: n_gpu_layers 0, so wllama never starts WebGPU. wllama runs inference in a Web Worker.
 import { Wllama } from '../vendor/wllama/index.js';
 import { MODEL, GEN, N_CTX } from './config.js';
+import { cachedModelBlob } from './offline.js';
 
 let wllama = null;
 let loading = null;
 export const info = { loaded: false, threads: 1, multithread: false, bytes: MODEL.bytes, file: MODEL.path.split('/').pop() };
 
+// Fallback only, for browsers without the Cache API: builds the Blob in memory.
 async function fetchModelBlob(onProgress) {
   const res = await fetch(new URL('../' + MODEL.path, import.meta.url));
   if (!res.ok) throw new Error('Model file not found: ' + MODEL.path + ' (run: node scripts/fetch-model.js)');
@@ -39,7 +41,11 @@ export function ensureModel(onProgress) {
       worker: new URL('../vendor/wllama-compat/wllama.js', import.meta.url).href,
       wasm: new URL('../vendor/wllama-compat/wllama.wasm', import.meta.url).href,
     });
-    const blob = await fetchModelBlob(onProgress);
+    // Prefer the Cache API Blob: it is backed by the file on disk, so there is no second copy in memory.
+    const blob = ('caches' in self)
+      ? await cachedModelBlob((got) => onProgress?.(got, MODEL.bytes))
+      : await fetchModelBlob(onProgress);
+    onProgress?.(MODEL.bytes, MODEL.bytes);
     const isolated = self.crossOriginIsolated === true;
     const n_threads = isolated ? Math.max(1, Math.min(4, Math.floor((navigator.hardwareConcurrency || 2) / 2))) : 1;
     await w.loadModel([blob], { n_ctx: N_CTX, n_gpu_layers: 0, n_threads });
