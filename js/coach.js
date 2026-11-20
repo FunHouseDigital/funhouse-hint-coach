@@ -81,6 +81,9 @@ export class Session {
   constructor() { this.learner = null; this.rows = []; }
   setLearner(code) { const c = normaliseCode(code); if (!c) return false; this.learner = c; return true; }
   add(row) { const r = { learner: this.learner, ...row }; this.rows.push(r); return r; }
+  // Both return how many rows were removed. Rows live in memory only, so removal is final.
+  clearLearner(code) { const n = this.rows.length; this.rows = this.rows.filter((r) => r.learner !== code); return n - this.rows.length; }
+  clearAll() { const n = this.rows.length; this.rows = []; return n; }
   toCsv() {
     const head = ['learner_code', 'exercise_id', 'event', 'hint_level', 'diagnosis', 'rating', 'checked_by'];
     const lines = [head.join(',')];

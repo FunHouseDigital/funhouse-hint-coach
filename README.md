@@ -24,8 +24,10 @@ It runs in the browser on the laptop itself. It needs no internet after the firs
 - Nothing leaves the device. The app makes no network calls except fetching its own files from the same place it was opened from. No analytics, no external fonts, no CDNs.
 - The facilitator types an anonymous learner code (L1, L2 and so on). Anything else is refused. No names, no ages.
 - Session notes live in memory only. They are gone when the tab closes. There is no localStorage or IndexedDB for learner records.
+- The facilitator can clear notes any time. **Clear this learner's record** removes every note for the current learner code (it asks "Clear all notes for L3? This cannot be undone."). **Clear all records** removes the notes for every learner. Cleared notes are not in any later CSV export.
+- The first screen says one thing: "Your answers stay on this laptop."
 - **Export session notes** builds a CSV on the laptop (no network) with: learner code, exercise id, event (hint, done, ask_facilitator), hint level, diagnosis, helpful / not helpful, and how it was checked (code, model or baseline fallback). No free text from the learner goes into the CSV.
-- The offline cache (service worker) holds only app files, packs, eval cases and the model. No learner data.
+- The offline cache (service worker) holds only app files, packs, eval cases and the model. These are not learner data, and the clear buttons do not touch them.
 
 ## Model and libraries
 

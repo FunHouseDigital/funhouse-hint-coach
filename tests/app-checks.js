@@ -59,6 +59,16 @@ const csv = s.toCsv().split('\r\n');
 eq(csv[0], 'learner_code,exercise_id,event,hint_level,diagnosis,rating,checked_by', 'csv header');
 eq(csv[1], 'L4,t3-e1,hint,1,wrong_then,helpful,model', 'csv row');
 
+// clearing records
+s.add({ exercise: 't1-e1', event: 'done', checkedBy: 'code' });
+s.setLearner('L5');
+s.add({ exercise: 't1-e1', event: 'hint', level: 1, diagnosis: 'turn_moves', checkedBy: 'code' });
+eq(s.clearLearner('L4'), 2, 'cleared 2 rows for L4');
+eq(s.toCsv().includes('L4,'), false, 'L4 gone from CSV');
+eq(s.toCsv().includes('L5,t1-e1'), true, 'L5 kept');
+eq(s.clearAll(), 1, 'clear all');
+eq(s.toCsv().trim().split('\r\n').length, 1, 'CSV is header only after clear all');
+
 eq(allExercises(packs).length, 12, '12 exercises listed');
 
 if (fail) { console.log(fail + ' app checks failed'); process.exit(1); }

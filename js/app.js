@@ -46,13 +46,23 @@ async function init() {
     $('codeMsg').textContent = 'Learner ' + session.learner;
     $('code').value = session.learner;
     $('welcome').hidden = true; $('main').hidden = false;
-    sel.disabled = false; $('exportBtn').disabled = false;
+    sel.disabled = false; $('exportBtn').disabled = false; $('clearOneBtn').disabled = false; $('clearAllBtn').disabled = false;
     openExercise(Number(sel.value) || 0);
   });
   $('langEn').addEventListener('click', () => setLang('en'));
   $('langSt').addEventListener('click', () => setLang('st'));
   $('hintBtn').addEventListener('click', () => requestHint(false));
   $('exportBtn').addEventListener('click', exportCsv);
+  $('clearOneBtn').addEventListener('click', () => {
+    if (!confirm(`Clear all notes for ${session.learner}? This cannot be undone.`)) return;
+    const n = session.clearLearner(session.learner);
+    afterClear(`Cleared ${n} notes for ${session.learner}.`);
+  });
+  $('clearAllBtn').addEventListener('click', () => {
+    if (!confirm('Clear all notes for every learner? This cannot be undone.')) return;
+    const n = session.clearAll();
+    afterClear(`Cleared all notes (${n}).`);
+  });
   $('code').focus();
 }
 
@@ -273,6 +283,12 @@ function showAsk(result) {
 function once(k, row) {
   if (shown.has(k)) return;
   shown.set(k, session.add({ exercise: cur.ex.id, ...row }));
+}
+
+// After clearing, start the exercise fresh so no old note can be changed or re-added.
+function afterClear(msg) {
+  openExercise(Number($('exSel').value) || 0);
+  $('status').textContent = msg;
 }
 
 // ---------- export ----------
