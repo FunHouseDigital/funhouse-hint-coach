@@ -19,11 +19,12 @@
 <body>
 <header class="top"><h1>Eval: synthetic cases</h1><a href="../" style="color:#fff">Back to the app</a></header>
 <div class="wrap">
-  <p class="warn">All cases in eval/cases.json are <strong>synthetic</strong>, written by the author for testing. They are not learner data. Numbers here are only valid for the laptop and browser that ran them.</p>
+  <p class="warn">All cases in eval/cases.json are <strong>synthetic</strong>, written by the author for testing. They are not learner data. Numbers here are only valid for the laptop and browser that ran them. Results are kept in memory only and are gone when this tab closes, so download them first.</p>
   <div class="actions">
     <button type="button" id="runCode" class="primary">1. Check route, sort and predict</button>
     <button type="button" id="runSent" class="primary">2. Run sentence cases (model and keyword)</button>
     <button type="button" id="dl" disabled>Download full report (JSON)</button>
+    <button type="button" id="dlTxt" disabled>Download counts (.txt)</button>
   </div>
   <div id="status" role="status" aria-live="polite" class="status"></div>
   <h2>Summary</h2>

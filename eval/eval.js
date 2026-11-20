@@ -3,6 +3,7 @@ import { evaluate, classifyPrompt, parseChoice, parseRoute } from '../engine.js'
 import { loadPacks, straightApostrophes } from '../js/coach.js';
 import { classify, ensureModel, info } from '../js/model.js';
 import { MODEL, GEN } from '../js/config.js';
+import { countsText } from './counts.js';
 
 const $ = (id) => document.getElementById(id);
 const status = (t) => { $('status').textContent = t; };
@@ -93,12 +94,12 @@ $('runCode').addEventListener('click', () => {
     const g = got(evaluate(ex, ex.type === 'route' ? parseRoute(c.attempt) : c.attempt));
     const ok = g === c.expect;
     if (ok) pass++;
-    report.codeCases.push({ n, pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, got: g, pass: ok });
+    report.codeCases.push({ n, type: ex.type, pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, got: g, pass: ok });
     row([n, c.exercise, JSON.stringify(c.attempt), c.expect, g + (ok ? ' (pass)' : ' (FAIL)'), '', '', ''], ['', '', '', '', ok ? 'pass' : 'fail']);
   }
   report.summary.code = { pass, total };
   report.startedAt ??= new Date().toISOString();
-  $('dl').disabled = false;
+  $('dl').disabled = false; $('dlTxt').disabled = false;
   summary();
   status(`Code checks: ${pass} of ${total} pass.`);
 });
@@ -129,7 +130,7 @@ $('runSent').addEventListener('click', async () => {
       if (choice === c.expect) modelCorrect++;
       if (kw === c.expect) keywordCorrect++;
       if (app === c.expect) appCorrect++;
-      report.sentenceCases.push({ n, pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, keyword: kw, keywordCorrect: kw === c.expect, model: choice, modelCorrect: choice === c.expect, modelText: text, app, appCorrect: app === c.expect, ms: Math.round(ms) });
+      report.sentenceCases.push({ n, type: 'sentence', pack: c.pack, exercise: c.exercise, attempt: c.attempt, expect: c.expect, keyword: kw, keywordCorrect: kw === c.expect, model: choice, modelCorrect: choice === c.expect, modelText: text, app, appCorrect: app === c.expect, ms: Math.round(ms) });
       row([n, c.exercise, c.attempt, c.expect, kw, choice ?? 'unclear', text, Math.round(ms)], ['', '', '', '', kw === c.expect ? 'pass' : 'fail', choice === c.expect ? 'pass' : 'fail']);
     }
     const ua = await uaMemory();
@@ -137,7 +138,7 @@ $('runSent').addEventListener('click', async () => {
       : peakHeap != null ? `${(peakHeap / 1e6).toFixed(0)} MB (performance.memory, main thread JS heap only)`
       : 'not reported';
     report.summary.sentence = { total: list.length, model: { correct: modelCorrect, total: list.length, unclear: modelUnclear }, keyword: { correct: keywordCorrect, total: list.length }, app: { correct: appCorrect, total: list.length }, medianMs: median(times), slowestMs: Math.max(...times), loadMs, peakMemory, peakJsHeapBytes: peakHeap, uaMemoryBytes: ua };
-    $('dl').disabled = false;
+    $('dl').disabled = false; $('dlTxt').disabled = false;
     summary();
     status('Sentence cases done.');
   } catch (e) {
@@ -154,6 +155,16 @@ $('dl').addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'hint-coach-eval-synthetic.json';
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+$('dlTxt').addEventListener('click', () => {
+  report.device = device();
+  const blob = new Blob([countsText(report)], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hint-coach-eval-counts-synthetic.txt';
   document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });

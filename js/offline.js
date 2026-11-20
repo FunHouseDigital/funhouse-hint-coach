@@ -3,7 +3,7 @@
 import { MODEL } from './config.js';
 
 // Must match the names in sw.js. Bump the shell version on every release so updates arrive.
-const SHELL = 'hint-coach-shell-v1';
+const SHELL = 'hint-coach-shell-v2';
 const MODEL_CACHE = 'hint-coach-model-' + MODEL.sha256.slice(0, 8);
 const base = new URL('../', import.meta.url);
 export const SHELL_FILES = [
@@ -12,7 +12,7 @@ export const SHELL_FILES = [
   'vendor/wllama/index.js', 'vendor/wllama/wllama.wasm',
   'vendor/wllama-compat/wllama.js', 'vendor/wllama-compat/wllama.wasm',
   'packs/t1-l1.json', 'packs/t2-l1.json', 'packs/t3-l1.json', 'packs/g910-t1-l1.json',
-  'eval/', 'eval/index.html', 'eval/eval.js', 'eval/cases.json',
+  'eval/', 'eval/index.html', 'eval/eval.js', 'eval/counts.js', 'eval/cases.json',
 ];
 
 async function putStream(cache, url, onBytes) {
