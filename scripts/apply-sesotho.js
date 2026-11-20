@@ -2,16 +2,22 @@
 // Accepts either docs/sesotho-translation-sheet.txt or docs/sesotho-unique-lines.txt (filled copies).
 //
 // Usage:
-//   node scripts/apply-sesotho.js <filled-sheet.txt> --dry            show what would change, write nothing
-//   node scripts/apply-sesotho.js <filled-sheet.txt>                  write the st fields into packs/
-//   node scripts/apply-sesotho.js <filled-sheet.txt> --packs <dir>    use another packs folder (tests)
+//   node scripts/apply-sesotho.js <filled-sheet.txt>
+//       Default. Writes a PREVIEW only: out/packs-preview/*.json and the change list out/sesotho-changes.txt.
+//       The real packs/ are never touched.
+//   node scripts/apply-sesotho.js <filled-sheet.txt> --dry
+//       Prints the change list and summary. Writes nothing.
+//   node scripts/apply-sesotho.js <filled-sheet.txt> --apply-real
+//       Writes the real packs/. Only after the owner has reviewed out/sesotho-changes.txt and said yes.
+//   Test options: --packs <dir> (source packs), --out <dir> (where the preview and list go).
 //
-// It stops without writing when: an English line no longer matches the pack, a key is unknown,
-// or the same English line got two different Sesotho texts. Entries whose {end} / {target} count
-// differs from the English are reported and skipped.
-import { readFileSync, writeFileSync } from 'node:fs';
+// It stops without writing anything when: an English line no longer matches the pack, a key is unknown,
+// the same English line got two different Sesotho texts, or a Sesotho text has a different number of
+// {end} / {target} placeholders than its English. It never writes Sesotho of its own: a place is filled
+// only from the sheet, either directly or by reusing the Sesotho given for an identical English line.
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const PACK_FILES = ['t1-l1.json', 't2-l1.json', 't3-l1.json', 'g910-t1-l1.json'];
@@ -38,7 +44,7 @@ export function parseSheet(text) {
     if (used && !cur.inSt) { cur.used.push(used[1].trim()); continue; }
     if (line.startsWith('English: ')) { cur.en = line.slice(9); continue; }
     if (line === 'English:') { cur.en = ''; continue; }
-    if (line === 'Used at:') continue;
+    if (/^Used (at|in \d+ places?):$/.test(line)) continue;
     if (/^Sesotho:/.test(line)) { cur.st = line.slice(8).trim(); cur.inSt = true; continue; }
     if (cur.inSt) {
       if (line.trim() === '' || /^(---|====|End of sheet)/.test(line)) { cur.inSt = false; continue; }
@@ -107,33 +113,62 @@ export function plan(packs, entries) {
     if (filledKeys.has(loc.key)) summary.filled++; else summary.reused++;
     changes.push({ ...loc, from: getSt(packs[loc.file], loc), to: st, how: filledKeys.has(loc.key) ? 'filled' : 'reused' });
   }
-  return { ok: mismatches.length === 0 && conflicts.length === 0, mismatches, conflicts, placeholderSkips, changes, summary };
+  return { ok: mismatches.length === 0 && conflicts.length === 0 && placeholderSkips.length === 0, mismatches, conflicts, placeholderSkips, changes, summary };
 }
 
 export function loadPacks(dir) {
   return Object.fromEntries(PACK_FILES.map((f) => [f, JSON.parse(readFileSync(join(dir, f), 'utf8'))]));
 }
 
-// Writes only the changed packs. Same formatting as the owner's files: 2-space JSON plus a final newline.
-export function writeChanges(dir, packs, changes) {
+// Writes packs into destDir with the changes applied. Same formatting as the owner's files:
+// 2-space JSON plus a final newline. Unchanged packs are copied byte for byte when destDir is a preview.
+// Returns the sha256 of each changed pack.
+export function writePacks(srcDir, destDir, packs, changes) {
+  mkdirSync(destDir, { recursive: true });
   const touched = new Set();
   for (const c of changes) { setSt(packs[c.file], c, c.to); touched.add(c.file); }
   const hashes = {};
-  for (const f of touched) {
-    const text = JSON.stringify(packs[f], null, 2) + '\n';
-    writeFileSync(join(dir, f), text, 'utf8');
-    hashes[f] = createHash('sha256').update(text, 'utf8').digest('hex');
+  for (const f of PACK_FILES) {
+    if (touched.has(f)) {
+      const text = JSON.stringify(packs[f], null, 2) + '\n';
+      writeFileSync(join(destDir, f), text, 'utf8');
+      hashes[f] = createHash('sha256').update(text, 'utf8').digest('hex');
+    } else if (destDir !== srcDir) {
+      writeFileSync(join(destDir, f), readFileSync(join(srcDir, f)));
+    }
   }
   return hashes;
 }
 
+// The plain list the owner reviews before --apply-real.
+export function changeList(r) {
+  const s = r.summary;
+  const L = [
+    'FunHouse Hint Coach - Sesotho changes to review',
+    'Each entry: the field, its English, the new Sesotho, and how it was filled.',
+    '"filled" = the translator wrote it for this place. "reused" = copied from an identical English line in the sheet.',
+    `Summary: filled ${s.filled}, reused ${s.reused}, empty ${s.empty}, conflicts ${s.conflicts}, already the same ${s.unchanged}`,
+    '',
+  ];
+  for (const c of r.changes) L.push(`[${c.key}]`, 'English: ' + c.en, 'Sesotho: ' + c.to, 'How: ' + c.how, '');
+  return L.join('\r\n');
+}
+
+const sameDir = (a, b) => resolve(a).toLowerCase() === resolve(b).toLowerCase();
+
 function main(argv) {
   const args = argv.slice(2);
+  const val = (flag) => { const i = args.indexOf(flag); return i >= 0 ? args[i + 1] : null; };
   const dry = args.includes('--dry');
-  const pi = args.indexOf('--packs');
-  const dir = pi >= 0 ? args[pi + 1] : fileURLToPath(new URL('../packs/', import.meta.url));
-  const sheet = args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--packs');
-  if (!sheet) { console.log('Usage: node scripts/apply-sesotho.js <filled-sheet.txt> [--dry] [--packs <dir>]'); return 2; }
+  const real = args.includes('--apply-real');
+  const repo = fileURLToPath(new URL('..', import.meta.url));
+  const dir = val('--packs') ?? join(repo, 'packs');
+  const out = val('--out') ?? join(repo, 'out');
+  const sheet = args.find((a, i) => !a.startsWith('--') && !['--packs', '--out'].includes(args[i - 1]));
+  if (!sheet) { console.log('Usage: node scripts/apply-sesotho.js <filled-sheet.txt> [--dry | --apply-real] [--packs <dir>] [--out <dir>]'); return 2; }
+  if (dry && real) { console.log('Use --dry or --apply-real, not both.'); return 2; }
+  const preview = join(out, 'packs-preview');
+  if (!real && sameDir(preview, dir)) { console.log('The preview folder cannot be the packs folder.'); return 2; }
 
   const packs = loadPacks(dir);
   const r = plan(packs, parseSheet(readFileSync(sheet, 'utf8')));
@@ -148,18 +183,32 @@ function main(argv) {
       for (const o of c.options) console.log(`    Sesotho: ${o.st}\n      from: ${o.keys.map((k) => '[' + k + ']').join(' ')}`);
     }
   }
-  for (const s of r.placeholderSkips) {
-    console.log(`SKIPPED (placeholders ${s.placeholders.join(' ')} do not match the English): ${s.keys.map((k) => '[' + k + ']').join(' ')}\n  English: ${s.en}\n  Sesotho: ${s.st}`);
+  if (r.placeholderSkips.length) {
+    console.log('STOPPED: {end} or {target} do not match the English. Nothing was written.');
+    for (const s of r.placeholderSkips) console.log(`  ${s.placeholders.join(' ')}: ${s.keys.map((k) => '[' + k + ']').join(' ')}\n    English: ${s.en}\n    Sesotho: ${s.st}`);
   }
   if (!r.ok) return 1;
 
-  for (const c of r.changes) console.log(`${dry ? 'would set' : 'set'} [${c.key}] (${c.how}): ${c.to}`);
+  for (const c of r.changes) console.log(`[${c.key}] (${c.how})\n  English: ${c.en}\n  Sesotho: ${c.to}`);
   const s = r.summary;
-  console.log(`Summary: filled ${s.filled}, reused ${s.reused}, empty ${s.empty}, conflicts ${s.conflicts}, placeholder skips ${s.placeholderSkips}, already the same ${s.unchanged}`);
+  console.log(`Summary: filled ${s.filled}, reused ${s.reused}, empty ${s.empty}, conflicts ${s.conflicts}, already the same ${s.unchanged}`);
   if (dry) { console.log('Dry run: nothing was written.'); return 0; }
+
+  mkdirSync(out, { recursive: true });
+  const listFile = join(out, 'sesotho-changes.txt');
+  writeFileSync(listFile, '\uFEFF' + changeList(r), 'utf8');
+  console.log('Change list saved: ' + listFile);
   if (!r.changes.length) { console.log('Nothing to write.'); return 0; }
-  const hashes = writeChanges(dir, packs, r.changes);
-  console.log('Wrote the st fields. New sha256 of each changed pack (for the owner to approve and re-pin):');
+
+  if (!real) {
+    const hashes = writePacks(dir, preview, packs, r.changes);
+    console.log('Preview written (the real packs were NOT changed): ' + preview);
+    for (const [f, h] of Object.entries(hashes)) console.log(`  ${f}  ${h}`);
+    console.log('After the owner reviews the list and says yes, run again with --apply-real.');
+    return 0;
+  }
+  const hashes = writePacks(dir, dir, packs, r.changes);
+  console.log('Wrote the st fields into ' + dir + '. New sha256 of each changed pack (for the owner to approve and re-pin):');
   for (const [f, h] of Object.entries(hashes)) console.log(`  ${f}  ${h}`);
   console.log('Note: node test.js and tests/pinned-hashes.js will now fail on purpose until the owner approves and updates them.');
   return 0;

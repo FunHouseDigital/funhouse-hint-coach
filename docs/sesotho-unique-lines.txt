@@ -1,7 +1,7 @@
 ﻿FunHouse Hint Coach - Sesotho translation sheet (short version: each English line once)
 
-What this is: every different English line the Hint Coach app can show. Some lines are used in more than one place.
-Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under "Used at".
+What this is: every different English line the Hint Coach app can show. Lines used in the most places come first.
+Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under it.
 
 Rules:
 - Do not change the lines in square brackets, like [U12] or [t1-l1.json | lr_swapped | 2]. They tell us where your text goes.
@@ -10,134 +10,8 @@ Rules:
 - All English lines are drafts too. Tell us if an English line is unclear.
 
 [U1]
-English: Look at your Turn card. After a turn, did the robot move to a new square?
-Used at:
-  [t1-l1.json | turn_moves | 1]
-  [t2-l1.json | turn_moves | 1]
-Sesotho: 
-
-[U2]
-English: Walk your cards on the grid and put a finger on the cap after each card. Which cards moved it?
-Used at:
-  [t1-l1.json | turn_moves | 2]
-  [t2-l1.json | turn_moves | 2]
-Sesotho: 
-
-[U3]
-English: A turn spins the robot on the spot. It stays on the same square. Only Forward moves it to a new square.
-Used at:
-  [t1-l1.json | turn_moves | 3]
-  [t2-l1.json | turn_moves | 3]
-Sesotho: 
-
-[U4]
-English: Stand behind the robot so left and right match. Which way does your turn card send it?
-Used at:
-  [t1-l1.json | lr_swapped | 1]
-  [t2-l1.json | lr_swapped | 1]
-Sesotho: 
-
-[U5]
-English: The robot's right, not yours. Face the same way as the robot and try the turn again.
-Used at:
-  [t1-l1.json | lr_swapped | 2]
-  [t2-l1.json | lr_swapped | 2]
-Sesotho: 
-
-[U6]
-English: Check each turn card. Would the other turn card keep the robot on the path?
-Used at:
-  [t1-l1.json | lr_swapped | 3]
-  [t2-l1.json | lr_swapped | 3]
-Sesotho: 
-
-[U7]
-English: Your robot ends on {end}. The goal is {target}. Walk your cards again, one at a time.
-Used at:
-  [t1-l1.json | stopped_short | 1]
-  [t2-l1.json | stopped_short | 1]
-Sesotho: 
-
-[U8]
-English: Count the squares the robot steps ON, not the one it starts on.
-Used at:
-  [t1-l1.json | stopped_short | 2]
-Sesotho: 
-
-[U9]
-English: Your route stops before the goal. Is there a Forward you can add?
-Used at:
-  [t1-l1.json | stopped_short | 3]
-Sesotho: 
-
-[U10]
-English: Your robot ends on {end}, past the goal. Walk your cards again, one at a time.
-Used at:
-  [t1-l1.json | went_too_far | 1]
-  [t2-l1.json | went_too_far | 1]
-Sesotho: 
-
-[U11]
-English: Count the squares the robot steps ON. Where should it stop?
-Used at:
-  [t1-l1.json | went_too_far | 2]
-Sesotho: 
-
-[U12]
-English: Your route goes one step too far. Is there a Forward you can take away?
-Used at:
-  [t1-l1.json | went_too_far | 3]
-Sesotho: 
-
-[U13]
-English: Your robot walked off the grid. Walk your cards with a finger and say each one.
-Used at:
-  [t1-l1.json | off_grid | 1]
-  [t2-l1.json | off_grid | 1]
-Sesotho: 
-
-[U14]
-English: After each turn, which way is the robot facing now? Say it out loud.
-Used at:
-  [t1-l1.json | off_grid | 2]
-  [t2-l1.json | off_grid | 2]
-Sesotho: 
-
-[U15]
-English: Find the card where the robot leaves the grid. Which way was it facing just before?
-Used at:
-  [t1-l1.json | off_grid | 3]
-  [t2-l1.json | off_grid | 3]
-Sesotho: 
-
-[U16]
-English: Your robot reaches the goal. Well done. Can you do it with fewer cards?
-Used at:
-  [t1-l1.json | too_long | 1]
-Sesotho: 
-
-[U17]
-English: Which cards could you take away and still reach {target}?
-Used at:
-  [t1-l1.json | too_long | 2]
-Sesotho: 
-
-[U18]
-English: Where does the path bend? A route with one turn in it can be shorter.
-Used at:
-  [t1-l1.json | too_long | 3]
-Sesotho: 
-
-[U19]
-English: Your robot ends on {end}. The goal is {target}.
-Used at:
-  [t1-l1.json | no_match | 1]
-  [t2-l1.json | no_match | 1]
-Sesotho: 
-
-[U20]
 English: Say the first step out loud. What comes next?
-Used at:
+Used in 6 places:
   [t1-l1.json | no_match | 2]
   [t1-l1.json | generic | 2]
   [t2-l1.json | no_match | 2]
@@ -146,200 +20,9 @@ Used at:
   [g910-t1-l1.json | generic | 2]
 Sesotho: 
 
-[U21]
-English: Walk the route on the grid. Where does the path bend, and what did the robot do there?
-Used at:
-  [t1-l1.json | no_match | 3]
-  [t2-l1.json | no_match | 3]
-Sesotho: 
-
-[U22]
-English: Your robot is on the right square. Which way is it facing?
-Used at:
-  [t1-l1.json | wrong_facing | 1]
-  [t2-l1.json | wrong_facing | 1]
-Sesotho: 
-
-[U23]
-English: The goal says which way the robot must face. Check your last card.
-Used at:
-  [t1-l1.json | wrong_facing | 2]
-  [t2-l1.json | wrong_facing | 2]
-Sesotho: 
-
-[U24]
-English: Walk your route and say the way the robot faces after every card.
-Used at:
-  [t1-l1.json | wrong_facing | 3]
-  [t2-l1.json | wrong_facing | 3]
-Sesotho: 
-
-[U25]
-English: Try again slowly. What does the exercise ask you to do first?
-Used at:
-  [t1-l1.json | generic | 1]
-  [t2-l1.json | generic | 1]
-  [t3-l1.json | generic | 1]
-  [g910-t1-l1.json | generic | 1]
-Sesotho: 
-
-[U26]
-English: Ask your partner what they think. If you are still stuck, ask your facilitator.
-Used at:
-  [t1-l1.json | generic | 3]
-  [t2-l1.json | generic | 3]
-  [t3-l1.json | generic | 3]
-  [g910-t1-l1.json | generic | 3]
-Sesotho: 
-
-[U27]
-English: Well done. Tell your partner how you know your robot ends on the right square.
-Used at:
-  [t1-l1.json | done | -]
-Sesotho: 
-
-[U28]
-English: Forward three times means three new squares. Count the squares you step ON.
-Used at:
-  [t2-l1.json | stopped_short | 2]
-  [t2-l1.json | went_too_far | 2]
-Sesotho: 
-
-[U29]
-English: Your route stops before the goal. Can you change a number or add a Forward?
-Used at:
-  [t2-l1.json | stopped_short | 3]
-Sesotho: 
-
-[U30]
-English: Your route goes one step too far. Can you change a number or take a Forward away?
-Used at:
-  [t2-l1.json | went_too_far | 3]
-Sesotho: 
-
-[U31]
-English: Your route works. Can you say it shorter?
-Used at:
-  [t2-l1.json | too_long | 1]
-Sesotho: 
-
-[U32]
-English: Look for Forward cards in a row. Can one card with a number do the same job?
-Used at:
-  [t2-l1.json | too_long | 2]
-Sesotho: 
-
-[U33]
-English: A number says how many times the card before it happens. Where in your route does a card repeat?
-Used at:
-  [t2-l1.json | too_long | 3]
-Sesotho: 
-
-[U34]
-English: Well done. Tell your partner what the number on a Forward card tells the robot to do.
-Used at:
-  [t2-l1.json | done | -]
-Sesotho: 
-
-[U35]
-English: IF is what happens first, the signal. THEN is what we do about it.
-Used at:
-  [t3-l1.json | swapped_if_then | 1]
-Sesotho: 
-
-[U36]
-English: Which part of your sentence is the whistle? Point to it. Is that the IF or the THEN?
-Used at:
-  [t3-l1.json | swapped_if_then | 2]
-Sesotho: 
-
-[U37]
-English: Start again with: If the ___ , then we ___ .
-Used at:
-  [t3-l1.json | swapped_if_then | 3]
-Sesotho: 
-
-[U38]
-English: Does your sentence have an IF part and a THEN part? Point to each.
-Used at:
-  [t3-l1.json | missing_then | 1]
-Sesotho: 
-
-[U39]
-English: What do the players do when the whistle blows?
-Used at:
-  [t3-l1.json | missing_then | 2]
-Sesotho: 
-
-[U40]
-English: Write it like this: If the whistle blows, then ... What do you do?
-Used at:
-  [t3-l1.json | missing_then | 3]
-Sesotho: 
-
-[U41]
-English: Act it out. The whistle blows. What do you do?
-Used at:
-  [t3-l1.json | wrong_then | 1]
-Sesotho: 
-
-[U42]
-English: What is the rule on the soccer field when the referee blows?
-Used at:
-  [t3-l1.json | wrong_then | 2]
-Sesotho: 
-
-[U43]
-English: The players ... when the whistle blows. Finish that sentence.
-Used at:
-  [t3-l1.json | wrong_then | 3]
-Sesotho: 
-
-[U44]
-English: What did you do when there was no whistle?
-Used at:
-  [t3-l1.json | stops_anyway | 1]
-Sesotho: 
-
-[U45]
-English: If there is no whistle, does the rule tell you to stop?
-Used at:
-  [t3-l1.json | stops_anyway | 2]
-Sesotho: 
-
-[U46]
-English: No whistle means nothing tells you to stop. What do you keep doing?
-Used at:
-  [t3-l1.json | stops_anyway | 3]
-Sesotho: 
-
-[U47]
-English: What happens on the field when there is no whistle?
-Used at:
-  [t3-l1.json | no_match | 1]
-Sesotho: 
-
-[U48]
-English: Walk on the spot. No whistle. What are you doing?
-Used at:
-  [t3-l1.json | no_match | 2]
-Sesotho: 
-
-[U49]
-English: Finish it with what the players keep doing: If there is no whistle, then ...
-Used at:
-  [t3-l1.json | no_match | 3]
-Sesotho: 
-
-[U50]
-English: Well done. Tell your partner another if-then rule from home or school.
-Used at:
-  [t3-l1.json | done | -]
-Sesotho: 
-
-[U51]
+[U2]
 English: What goes in? What comes out? Where is it kept?
-Used at:
+Used in 5 places:
   [g910-t1-l1.json | storage_as_output | 1]
   [g910-t1-l1.json | input_output_swapped | 1]
   [g910-t1-l1.json | processing_unclear | 1]
@@ -347,177 +30,494 @@ Used at:
   [g910-t1-l1.json | no_match | 1]
 Sesotho: 
 
+[U3]
+English: Try again slowly. What does the exercise ask you to do first?
+Used in 4 places:
+  [t1-l1.json | generic | 1]
+  [t2-l1.json | generic | 1]
+  [t3-l1.json | generic | 1]
+  [g910-t1-l1.json | generic | 1]
+Sesotho: 
+
+[U4]
+English: Ask your partner what they think. If you are still stuck, ask your facilitator.
+Used in 4 places:
+  [t1-l1.json | generic | 3]
+  [t2-l1.json | generic | 3]
+  [t3-l1.json | generic | 3]
+  [g910-t1-l1.json | generic | 3]
+Sesotho: 
+
+[U5]
+English: Look at your Turn card. After a turn, did the robot move to a new square?
+Used in 2 places:
+  [t1-l1.json | turn_moves | 1]
+  [t2-l1.json | turn_moves | 1]
+Sesotho: 
+
+[U6]
+English: Walk your cards on the grid and put a finger on the cap after each card. Which cards moved it?
+Used in 2 places:
+  [t1-l1.json | turn_moves | 2]
+  [t2-l1.json | turn_moves | 2]
+Sesotho: 
+
+[U7]
+English: A turn spins the robot on the spot. It stays on the same square. Only Forward moves it to a new square.
+Used in 2 places:
+  [t1-l1.json | turn_moves | 3]
+  [t2-l1.json | turn_moves | 3]
+Sesotho: 
+
+[U8]
+English: Stand behind the robot so left and right match. Which way does your turn card send it?
+Used in 2 places:
+  [t1-l1.json | lr_swapped | 1]
+  [t2-l1.json | lr_swapped | 1]
+Sesotho: 
+
+[U9]
+English: The robot's right, not yours. Face the same way as the robot and try the turn again.
+Used in 2 places:
+  [t1-l1.json | lr_swapped | 2]
+  [t2-l1.json | lr_swapped | 2]
+Sesotho: 
+
+[U10]
+English: Check each turn card. Would the other turn card keep the robot on the path?
+Used in 2 places:
+  [t1-l1.json | lr_swapped | 3]
+  [t2-l1.json | lr_swapped | 3]
+Sesotho: 
+
+[U11]
+English: Your robot ends on {end}. The goal is {target}. Walk your cards again, one at a time.
+Used in 2 places:
+  [t1-l1.json | stopped_short | 1]
+  [t2-l1.json | stopped_short | 1]
+Sesotho: 
+
+[U12]
+English: Your robot ends on {end}, past the goal. Walk your cards again, one at a time.
+Used in 2 places:
+  [t1-l1.json | went_too_far | 1]
+  [t2-l1.json | went_too_far | 1]
+Sesotho: 
+
+[U13]
+English: Your robot walked off the grid. Walk your cards with a finger and say each one.
+Used in 2 places:
+  [t1-l1.json | off_grid | 1]
+  [t2-l1.json | off_grid | 1]
+Sesotho: 
+
+[U14]
+English: After each turn, which way is the robot facing now? Say it out loud.
+Used in 2 places:
+  [t1-l1.json | off_grid | 2]
+  [t2-l1.json | off_grid | 2]
+Sesotho: 
+
+[U15]
+English: Find the card where the robot leaves the grid. Which way was it facing just before?
+Used in 2 places:
+  [t1-l1.json | off_grid | 3]
+  [t2-l1.json | off_grid | 3]
+Sesotho: 
+
+[U16]
+English: Your robot ends on {end}. The goal is {target}.
+Used in 2 places:
+  [t1-l1.json | no_match | 1]
+  [t2-l1.json | no_match | 1]
+Sesotho: 
+
+[U17]
+English: Walk the route on the grid. Where does the path bend, and what did the robot do there?
+Used in 2 places:
+  [t1-l1.json | no_match | 3]
+  [t2-l1.json | no_match | 3]
+Sesotho: 
+
+[U18]
+English: Your robot is on the right square. Which way is it facing?
+Used in 2 places:
+  [t1-l1.json | wrong_facing | 1]
+  [t2-l1.json | wrong_facing | 1]
+Sesotho: 
+
+[U19]
+English: The goal says which way the robot must face. Check your last card.
+Used in 2 places:
+  [t1-l1.json | wrong_facing | 2]
+  [t2-l1.json | wrong_facing | 2]
+Sesotho: 
+
+[U20]
+English: Walk your route and say the way the robot faces after every card.
+Used in 2 places:
+  [t1-l1.json | wrong_facing | 3]
+  [t2-l1.json | wrong_facing | 3]
+Sesotho: 
+
+[U21]
+English: Forward three times means three new squares. Count the squares you step ON.
+Used in 2 places:
+  [t2-l1.json | stopped_short | 2]
+  [t2-l1.json | went_too_far | 2]
+Sesotho: 
+
+[U22]
+English: Count the squares the robot steps ON, not the one it starts on.
+Used in 1 place:
+  [t1-l1.json | stopped_short | 2]
+Sesotho: 
+
+[U23]
+English: Your route stops before the goal. Is there a Forward you can add?
+Used in 1 place:
+  [t1-l1.json | stopped_short | 3]
+Sesotho: 
+
+[U24]
+English: Count the squares the robot steps ON. Where should it stop?
+Used in 1 place:
+  [t1-l1.json | went_too_far | 2]
+Sesotho: 
+
+[U25]
+English: Your route goes one step too far. Is there a Forward you can take away?
+Used in 1 place:
+  [t1-l1.json | went_too_far | 3]
+Sesotho: 
+
+[U26]
+English: Your robot reaches the goal. Well done. Can you do it with fewer cards?
+Used in 1 place:
+  [t1-l1.json | too_long | 1]
+Sesotho: 
+
+[U27]
+English: Which cards could you take away and still reach {target}?
+Used in 1 place:
+  [t1-l1.json | too_long | 2]
+Sesotho: 
+
+[U28]
+English: Where does the path bend? A route with one turn in it can be shorter.
+Used in 1 place:
+  [t1-l1.json | too_long | 3]
+Sesotho: 
+
+[U29]
+English: Well done. Tell your partner how you know your robot ends on the right square.
+Used in 1 place:
+  [t1-l1.json | done | -]
+Sesotho: 
+
+[U30]
+English: Your route stops before the goal. Can you change a number or add a Forward?
+Used in 1 place:
+  [t2-l1.json | stopped_short | 3]
+Sesotho: 
+
+[U31]
+English: Your route goes one step too far. Can you change a number or take a Forward away?
+Used in 1 place:
+  [t2-l1.json | went_too_far | 3]
+Sesotho: 
+
+[U32]
+English: Your route works. Can you say it shorter?
+Used in 1 place:
+  [t2-l1.json | too_long | 1]
+Sesotho: 
+
+[U33]
+English: Look for Forward cards in a row. Can one card with a number do the same job?
+Used in 1 place:
+  [t2-l1.json | too_long | 2]
+Sesotho: 
+
+[U34]
+English: A number says how many times the card before it happens. Where in your route does a card repeat?
+Used in 1 place:
+  [t2-l1.json | too_long | 3]
+Sesotho: 
+
+[U35]
+English: Well done. Tell your partner what the number on a Forward card tells the robot to do.
+Used in 1 place:
+  [t2-l1.json | done | -]
+Sesotho: 
+
+[U36]
+English: IF is what happens first, the signal. THEN is what we do about it.
+Used in 1 place:
+  [t3-l1.json | swapped_if_then | 1]
+Sesotho: 
+
+[U37]
+English: Which part of your sentence is the whistle? Point to it. Is that the IF or the THEN?
+Used in 1 place:
+  [t3-l1.json | swapped_if_then | 2]
+Sesotho: 
+
+[U38]
+English: Start again with: If the ___ , then we ___ .
+Used in 1 place:
+  [t3-l1.json | swapped_if_then | 3]
+Sesotho: 
+
+[U39]
+English: Does your sentence have an IF part and a THEN part? Point to each.
+Used in 1 place:
+  [t3-l1.json | missing_then | 1]
+Sesotho: 
+
+[U40]
+English: What do the players do when the whistle blows?
+Used in 1 place:
+  [t3-l1.json | missing_then | 2]
+Sesotho: 
+
+[U41]
+English: Write it like this: If the whistle blows, then ... What do you do?
+Used in 1 place:
+  [t3-l1.json | missing_then | 3]
+Sesotho: 
+
+[U42]
+English: Act it out. The whistle blows. What do you do?
+Used in 1 place:
+  [t3-l1.json | wrong_then | 1]
+Sesotho: 
+
+[U43]
+English: What is the rule on the soccer field when the referee blows?
+Used in 1 place:
+  [t3-l1.json | wrong_then | 2]
+Sesotho: 
+
+[U44]
+English: The players ... when the whistle blows. Finish that sentence.
+Used in 1 place:
+  [t3-l1.json | wrong_then | 3]
+Sesotho: 
+
+[U45]
+English: What did you do when there was no whistle?
+Used in 1 place:
+  [t3-l1.json | stops_anyway | 1]
+Sesotho: 
+
+[U46]
+English: If there is no whistle, does the rule tell you to stop?
+Used in 1 place:
+  [t3-l1.json | stops_anyway | 2]
+Sesotho: 
+
+[U47]
+English: No whistle means nothing tells you to stop. What do you keep doing?
+Used in 1 place:
+  [t3-l1.json | stops_anyway | 3]
+Sesotho: 
+
+[U48]
+English: What happens on the field when there is no whistle?
+Used in 1 place:
+  [t3-l1.json | no_match | 1]
+Sesotho: 
+
+[U49]
+English: Walk on the spot. No whistle. What are you doing?
+Used in 1 place:
+  [t3-l1.json | no_match | 2]
+Sesotho: 
+
+[U50]
+English: Finish it with what the players keep doing: If there is no whistle, then ...
+Used in 1 place:
+  [t3-l1.json | no_match | 3]
+Sesotho: 
+
+[U51]
+English: Well done. Tell your partner another if-then rule from home or school.
+Used in 1 place:
+  [t3-l1.json | done | -]
+Sesotho: 
+
 [U52]
 English: A part that keeps things for later does a different job from a part that shows things.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | storage_as_output | 2]
 Sesotho: 
 
 [U53]
 English: Look at the cards on OUTPUT. Which of them keep things instead of showing them?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | storage_as_output | 3]
 Sesotho: 
 
 [U54]
 English: Pick one card from INPUT. Does it send something in, or show something out?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | input_output_swapped | 2]
 Sesotho: 
 
 [U55]
 English: Check the cards on INPUT and OUTPUT. Swap any that are on the wrong side.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | input_output_swapped | 3]
 Sesotho: 
 
 [U56]
 English: Which part does the working between input and output?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | processing_unclear | 2]
 Sesotho: 
 
 [U57]
 English: Look at the cards left over. Which ones work on information?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | processing_unclear | 3]
 Sesotho: 
 
 [U58]
 English: Pick one card you are sure about and say its job in one sentence.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | mixed | 2]
 Sesotho: 
 
 [U59]
 English: Move one card you are unsure about and ask your partner what they think.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | mixed | 3]
 Sesotho: 
 
 [U60]
 English: You gave how far the ball moved. The question asks where it ends on the stage.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | distance_not_coordinate | 1]
 Sesotho: 
 
 [U61]
 English: Where did the ball start? Begin from that x number.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | distance_not_coordinate | 2]
 Sesotho: 
 
 [U62]
 English: Add the distance moved to the starting x. What do you get?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | distance_not_coordinate | 3]
 Sesotho: 
 
 [U63]
 English: Look at each block. Which way does the ball face for each move?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | counted_all_moves | 1]
 Sesotho: 
 
 [U64]
 English: Which blocks point the ball up or down, and which point it right?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | counted_all_moves | 2]
 Sesotho: 
 
 [U65]
 English: Only the moves to the right change x. Count just those.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | counted_all_moves | 3]
 Sesotho: 
 
 [U66]
 English: Check the y number again. Go through every block in order.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | forgot_down | 1]
 Sesotho: 
 
 [U67]
 English: What does the Down block do to y?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | forgot_down | 2]
 Sesotho: 
 
 [U68]
 English: Up 15 and Down 15. Where does y end?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | forgot_down | 3]
 Sesotho: 
 
 [U69]
 English: Walk the blocks one by one and write x and y after each.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | no_match_predict | 1]
 Sesotho: 
 
 [U70]
 English: Use the planning strip. Write the position after every move.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | no_match_predict | 2]
 Sesotho: 
 
 [U71]
 English: Which blocks change x? Which blocks change y?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | no_match_predict | 3]
 Sesotho: 
 
 [U72]
 English: Say the sale out loud. What does the assistant do first? What do you get at the end?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | no_match | 2]
 Sesotho: 
 
 [U73]
 English: Fill in the first blank with what goes into the till and the second with what comes out.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | no_match | 3]
 Sesotho: 
 
 [U74]
 English: What goes in? What comes out?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | swapped_input_output | 1]
 Sesotho: 
 
 [U75]
 English: The input goes into the till. Does the slip go in, or come out?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | swapped_input_output | 2]
 Sesotho: 
 
 [U76]
 English: Swap your two answers and read the sentence again.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | swapped_input_output | 3]
 Sesotho: 
 
 [U77]
 English: What goes in? Say what the assistant types or scans.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | processing_as_input | 1]
 Sesotho: 
 
 [U78]
 English: Adding up happens inside the till. What does the assistant give the till first?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | processing_as_input | 2]
 Sesotho: 
 
 [U79]
 English: Think of the barcode or the price. Which one goes in?
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | processing_as_input | 3]
 Sesotho: 
 
 [U80]
 English: Well done. Explain your answer to your partner in your own words.
-Used at:
+Used in 1 place:
   [g910-t1-l1.json | done | -]
 Sesotho: 
 

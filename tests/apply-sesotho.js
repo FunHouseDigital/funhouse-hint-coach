@@ -1,11 +1,11 @@
 // Tests scripts/apply-sesotho.js on temp copies of the packs. The real packs are never written.
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { parseSheet, plan, loadPacks, writeChanges, PACK_FILES } from '../scripts/apply-sesotho.js';
+import { parseSheet, plan, loadPacks, writePacks, PACK_FILES } from '../scripts/apply-sesotho.js';
 import { buildSheet, buildUniqueSheet } from '../scripts/make-translation-sheet.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -41,7 +41,7 @@ eq(committedUniq === uniq.text, true, 'docs/sesotho-unique-lines.txt is up to da
   const r = plan(packs, parseSheet(fillUnique(uniq.text)));
   eq(r.ok, true, 'unique sheet ok');
   eq([r.summary.filled, r.summary.reused, r.summary.empty, r.summary.conflicts], [112, 0, 0, 0], 'unique sheet fills all 112');
-  writeChanges(dir, packs, r.changes);
+  writePacks(dir, dir, packs, r.changes);
   const after = loadPacks(dir);
   for (const f of PACK_FILES) eq(noSt(after[f]), noSt(before[f]), 'only st changed in ' + f);
   eq(Object.values(after['t1-l1.json'].hints).every((h) => h.st.every((s) => /^ST-\d+ Sesotho/.test(s))), true, 'st filled');
@@ -50,7 +50,7 @@ eq(committedUniq === uniq.text, true, 'docs/sesotho-unique-lines.txt is up to da
 }
 
 // 2. Full sheet: one occurrence of a repeated English line filled, copied to the others.
-const dupe = [...uniq.text.matchAll(/\[U\d+\]\r\nEnglish: ([^\r]*)\r\nUsed at:\r\n((?:  \[[^\]]+\]\r\n){2,})/g)].find((m) => !m[1].includes('{'));
+const dupe = [...uniq.text.matchAll(/\[U\d+\]\r\nEnglish: ([^\r]*)\r\nUsed in \d+ places:\r\n((?:  \[[^\]]+\]\r\n){2,})/g)].find((m) => !m[1].includes('{'));
 const dupeKeys = [...dupe[2].matchAll(/\[([^\]]+)\]/g)].map((m) => m[1]);
 {
   const dir = tempPacks();
@@ -80,28 +80,49 @@ const dupeKeys = [...dupe[2].matchAll(/\[([^\]]+)\]/g)].map((m) => m[1]);
   eq([r.ok, r.mismatches.map((m) => m.key)], [false, [k]], 'English mismatch found');
 }
 
-// 5. Placeholder count wrong: reported and skipped, the rest still applies.
+// 5. Placeholder count wrong: stop, write nothing, list it.
 {
+  const dir = tempPacks();
+  const out = mkdtempSync(join(tmpdir(), 'hc-out-')); temps.push(out);
+  const before = hashDir(dir);
   const ph = [...full.matchAll(/\[([^\]]+)\]\r\nEnglish: ([^\r]*\{(?:end|target)\}[^\r]*)\r\n/g)][0];
   let t = fillFull(full, ph[1], 'Sesotho e se nang placeholder');
   t = fillFull(t, 't1-l1.json | turn_moves | 2', 'Sesotho e nepahetseng');
-  const r = plan(loadPacks(tempPacks()), parseSheet(t));
-  eq(r.ok, true, 'placeholder case still ok');
-  eq(r.placeholderSkips.length, 1, 'one placeholder skip');
-  eq(r.changes.some((c) => c.key === ph[1]), false, 'placeholder entry not written');
-  eq(r.changes.some((c) => c.key === 't1-l1.json | turn_moves | 2'), true, 'other entry written');
+  const r = plan(loadPacks(dir), parseSheet(t));
+  eq([r.ok, r.placeholderSkips.length], [false, 1], 'placeholder mismatch stops');
+  const w = spawnSync(process.execPath, [join(root, 'scripts/apply-sesotho.js'), write(t), '--packs', dir, '--out', out], { encoding: 'utf8' });
+  eq([w.status, /STOPPED: \{end\} or \{target\}/.test(w.stdout), hashDir(dir) === before, existsSync(join(out, 'packs-preview'))], [1, true, true, false], 'placeholder stop writes nothing');
 }
 
-// 6. --dry prints a summary and writes nothing. A real run prints new hashes.
+// 6. Modes. --dry writes nothing. Default writes only a preview and the change list. --apply-real writes the packs folder.
 {
   const dir = tempPacks();
+  const out = mkdtempSync(join(tmpdir(), 'hc-out-')); temps.push(out);
   const before = hashDir(dir);
-  const sheet = write(fillFull(full, 't3-l1.json | done | -', 'Ho lokile.'));
-  const d = spawnSync(process.execPath, [join(root, 'scripts/apply-sesotho.js'), sheet, '--dry', '--packs', dir], { encoding: 'utf8' });
-  eq([d.status, /Summary: filled 1/.test(d.stdout), /Dry run/.test(d.stdout), hashDir(dir) === before], [0, true, true, true], 'dry run');
-  const w = spawnSync(process.execPath, [join(root, 'scripts/apply-sesotho.js'), sheet, '--packs', dir], { encoding: 'utf8' });
-  eq([w.status, /t3-l1\.json\s+[0-9a-f]{64}/.test(w.stdout)], [0, true], 'real run prints new hash');
-  eq(JSON.parse(readFileSync(join(dir, 't3-l1.json'), 'utf8')).done.st, 'Ho lokile.', 'done.st written');
+  // One generic line filled once: it must be reused at every identical English line, and nothing else filled.
+  const t = fillFull(fillFull(full, 't3-l1.json | done | -', 'Ho lokile.'), dupeKeys[0], 'Sesotho e le nngwe');
+  const sheet = write(t);
+  const run = (...extra) => spawnSync(process.execPath, [join(root, 'scripts/apply-sesotho.js'), sheet, '--packs', dir, '--out', out, ...extra], { encoding: 'utf8' });
+
+  const d = run('--dry');
+  eq([d.status, /Dry run/.test(d.stdout), hashDir(dir) === before, existsSync(join(out, 'sesotho-changes.txt'))], [0, true, true, false], 'dry run writes nothing');
+
+  const p = run();
+  eq([p.status, hashDir(dir) === before], [0, true], 'default run leaves the packs folder alone');
+  eq(/Preview written/.test(p.stdout) && /t3-l1\.json\s+[0-9a-f]{64}/.test(p.stdout), true, 'preview hashes printed');
+  const prev = loadPacks(join(out, 'packs-preview'));
+  eq(prev['t3-l1.json'].done.st, 'Ho lokile.', 'preview has done.st');
+  const list = readFileSync(join(out, 'sesotho-changes.txt'), 'utf8');
+  const listed = [...list.matchAll(/^\[(.+)\]\r$/gm)].map((m) => m[1]).sort();
+  eq(listed, ['t3-l1.json | done | -', ...dupeKeys].sort(), 'change list has exactly the changed fields');
+  eq(/How: filled/.test(list) && /How: reused/.test(list) && /English: /.test(list), true, 'change list shows English and how');
+  // Nothing filled where the sheet had no Sesotho for that English.
+  const allSt = PACK_FILES.flatMap((f) => [...Object.values(prev[f].hints).flatMap((h) => h.st), prev[f].done.st]).filter(Boolean);
+  eq(allSt.length, 1 + dupeKeys.length, 'no other field filled');
+
+  const a = run('--apply-real');
+  eq([a.status, hashDir(dir) !== before, /will now fail on purpose/.test(a.stdout)], [0, true, true], '--apply-real writes the packs folder');
+  eq(JSON.parse(readFileSync(join(dir, 't3-l1.json'), 'utf8')).done.st, 'Ho lokile.', 'done.st written for real (temp copy)');
 }
 
 // 7. An empty sheet changes nothing.

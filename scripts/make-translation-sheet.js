@@ -39,7 +39,8 @@ export function buildSheet() {
   return { text: L.join('\r\n'), count };
 }
 
-// The shorter sheet: each English line once (first-seen order of the full sheet), with every place it is used.
+// The shorter sheet: each English line once, with every place it is used.
+// Sorted by how many places use it, most first. Ties keep first-seen order of the full sheet.
 export function buildUniqueSheet() {
   const lines = new Map(); // English -> [keys]
   for (const f of PACK_FILES) {
@@ -50,8 +51,8 @@ export function buildUniqueSheet() {
   const L = [
     'FunHouse Hint Coach - Sesotho translation sheet (short version: each English line once)',
     '',
-    'What this is: every different English line the Hint Coach app can show. Some lines are used in more than one place.',
-    'Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under "Used at".',
+    'What this is: every different English line the Hint Coach app can show. Lines used in the most places come first.',
+    'Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under it.',
     '',
     'Rules:',
     '- Do not change the lines in square brackets, like [U12] or [t1-l1.json | lr_swapped | 2]. They tell us where your text goes.',
@@ -60,10 +61,11 @@ export function buildUniqueSheet() {
     '- All English lines are drafts too. Tell us if an English line is unclear.',
     '',
   ];
+  const sorted = [...lines].map((x, i) => [...x, i]).sort((a, b) => b[1].length - a[1].length || a[2] - b[2]);
   let n = 0;
-  for (const [en, keys] of lines) {
+  for (const [en, keys] of sorted) {
     n++;
-    L.push(`[U${n}]`, 'English: ' + en, 'Used at:', ...keys.map((k) => '  [' + k + ']'), 'Sesotho: ', '');
+    L.push(`[U${n}]`, 'English: ' + en, `Used in ${keys.length} place${keys.length === 1 ? '' : 's'}:`, ...keys.map((k) => '  [' + k + ']'), 'Sesotho: ', '');
   }
   L.push('End of sheet. Lines: ' + n, '');
   return { text: L.join('\r\n'), count: n };
