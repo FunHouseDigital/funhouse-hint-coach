@@ -1,7 +1,7 @@
 // Checks the app's own logic (coach.js) with a fake model. Run: node tests/app-checks.js
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { diagnose, stepLadder, newLadder, sesothoFellBack, normaliseCode, Session, allExercises } from '../js/coach.js';
+import { straightApostrophes, diagnose, stepLadder, newLadder, sesothoFellBack, normaliseCode, Session, allExercises } from '../js/coach.js';
 import { PACKS } from '../js/config.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -21,6 +21,11 @@ const fb = await diagnose(t3, ex, 'If the whistle blows, then everyone stops.', 
 eq([fb.checkedBy, fb.complete], ['baseline fallback', true], 'unclear reply -> baseline');
 const fb2 = await diagnose(t3, ex, 'everyone stops', fake('not correct'));
 eq([fb2.checkedBy, fb2.complete], ['baseline fallback', false], 'negated reply never done');
+
+// curly apostrophes are straightened before parseChoice
+eq(straightApostrophes('isn\u2019t \u2018correct\u2019'), "isn't 'correct'", 'curly to straight');
+const curly = await diagnose(t3, ex, 'everyone stops', fake('It isn\u2019t correct'));
+eq([curly.checkedBy, curly.complete], ['baseline fallback', false], 'curly negation never done');
 
 // non-sentence types never call the model
 const route = packs['t1-l1'].exercises[0];

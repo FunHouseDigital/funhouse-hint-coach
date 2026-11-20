@@ -26,7 +26,7 @@ for (const f of files) {
   mkdirSync(dirname(dest), { recursive: true });
   cpSync(join(root, f), dest);
 }
-// shortcut: the start file (Start Hint Coach.cmd) is added here once the owner approves its exact contents.
+cpSync(join(root, 'usb', 'Start Hint Coach.cmd'), join(out, 'Start Hint Coach.cmd'));
 writeFileSync(join(out, 'README-USB.txt'), [
   'FunHouse Hint Coach - USB pack',
   '',
@@ -34,8 +34,11 @@ writeFileSync(join(out, 'README-USB.txt'), [
   '- app\\  the Hint Coach app, the helper model and the exercise packs.',
   '',
   'How to start it',
-  '- The start file (Start Hint Coach.cmd) is not in this pack yet. It is waiting for approval.',
-  '- Until then, open the app from a computer that serves this folder on http://127.0.0.1 (see README.md in the repo).',
+  '1. Double-click Start Hint Coach.cmd. A black window opens and then the browser opens the app.',
+  '2. Keep the black window open while you use Hint Coach. Close it to stop.',
+  '3. Windows protected your PC: click More info, then Run anyway.',
+  '4. If antivirus or a school policy blocks it, show IT the notes at the top of Start Hint Coach.cmd (open it in Notepad).',
+  '- No internet is needed. Nothing is installed.',
   '',
   'Privacy',
   '- Nothing leaves the laptop. Learner notes stay in memory until you press Export session notes.',

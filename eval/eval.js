@@ -1,6 +1,6 @@
 // Eval page. Synthetic cases only. Runs in the browser, nothing is sent anywhere.
 import { evaluate, classifyPrompt, parseChoice, parseRoute } from '../engine.js';
-import { loadPacks } from '../js/coach.js';
+import { loadPacks, straightApostrophes } from '../js/coach.js';
 import { classify, ensureModel, info } from '../js/model.js';
 import { MODEL, GEN } from '../js/config.js';
 
@@ -124,7 +124,7 @@ $('runSent').addEventListener('click', async () => {
       const { text, ms } = await classify(classifyPrompt(pack, ex, c.attempt));
       times.push(ms);
       sampleHeap();
-      const choice = parseChoice(text, ex);
+      const choice = parseChoice(straightApostrophes(text), ex);
       const app = choice ?? kw;
       if (choice === null) modelUnclear++;
       if (choice === c.expect) modelCorrect++;

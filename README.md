@@ -64,9 +64,38 @@ node scripts/fetch-model.js
 node scripts/make-usb-pack.js
 ```
 
-This builds `dist/usb-pack/` (app, vendor files, model, packs, eval and `README-USB.txt`). Copy that folder to a USB stick.
+This builds `dist/usb-pack/` (about 521 MB): `Start Hint Coach.cmd`, `README-USB.txt` and the `app` folder (app, vendor files, model, packs, eval). Copy the whole `usb-pack` folder to a USB stick.
 
-The start file **Start Hint Coach.cmd** is not built yet. Its exact contents are waiting for the owner's approval. When it is added it will sit at the pack root and start a tiny web server built into Windows PowerShell, bound only to 127.0.0.1, then open the browser. The school laptop will need nothing installed.
+On the school laptop (Windows 10 or 11, no internet needed):
+
+1. Plug in the USB stick. Copy the `usb-pack` folder to the laptop (for example to Documents). It runs from the USB stick too, but loading is faster from the laptop's own disk.
+2. Open the folder. Double-click **Start Hint Coach.cmd**. (If Windows hides file endings it shows as "Start Hint Coach", type "Windows Command Script".)
+3. If a blue box says **Windows protected your PC**, click **More info**, then **Run anyway**. See the next section.
+4. A black window opens and says "FunHouse Hint Coach is running on this laptop only". The browser opens the app at `http://127.0.0.1:8765/app/` (or the next port up to 8785).
+5. Keep the black window open while you use Hint Coach. Use Chrome or Edge if the browser asks.
+6. When you are done, press **Export session notes** first if you want the notes. Then close the browser tab and close the black window. Closing the black window stops the server.
+
+What `Start Hint Coach.cmd` is: one plain text file you can open in Notepad. The notes at the top explain it for teachers and IT. It starts Windows PowerShell 5.1 (built into Windows) and runs a tiny web server with `System.Net.HttpListener` bound only to `http://127.0.0.1`. It serves only the pack folder, with the right file types, refuses paths that try to leave the folder, supports Range requests for the model file, and sends `Cross-Origin-Opener-Policy: same-origin`, `Cross-Origin-Embedder-Policy: require-corp` and `Cross-Origin-Resource-Policy: same-origin`, so the model may use several threads. If the browser is not cross-origin isolated anyway, the app uses one thread by itself. It needs no admin rights, installs nothing, writes nothing, makes no internet connection and changes no system settings (`-ExecutionPolicy Bypass` applies to that one window only).
+
+### If PowerShell is blocked or antivirus warns
+
+**"Windows protected your PC" (blue box, Microsoft Defender SmartScreen)**
+- What it means: Windows has not seen this file before, and it came from outside (a USB stick or a download). It is not saying the file is harmful.
+- What to do: click **More info**, check the name says Start Hint Coach.cmd, then click **Run anyway**. Windows usually asks only once.
+- If there is no Run anyway button, the school has locked this. Ask IT (see the last point).
+
+**Antivirus warns or the file disappears (quarantine)**
+- What it means: some antivirus tools flag any script that starts PowerShell, even a harmless one. It is a general rule, not a finding about this file.
+- What to do: open the antivirus app, find the file in its quarantine or history list, and choose **Restore** and **Allow**. In Windows Security: Virus and threat protection > Protection history > pick the item > Actions > Restore.
+- Or ask IT to allow this one file. Show them the notes at the top of `Start Hint Coach.cmd` (right-click > Open with > Notepad). Every line is plain text.
+
+**The black window opens and closes, or shows red text about policy or "language mode"**
+- What it means: the school has turned PowerShell off or limited it with a group policy. Bypass for one window cannot get past that, and it should not.
+- What to do: ask IT to allow `Start Hint Coach.cmd` for this laptop. Or use the one-time-online way below on that laptop instead: open the app once while online from a web server, wait for "Ready offline.", and after that it works with no internet.
+
+**"Could not find a free port"**
+- What it means: ports 8765 to 8785 are all in use, usually because Hint Coach is already open many times.
+- What to do: close the other black Hint Coach windows and try again.
 
 ### One-time-online PWA way
 
@@ -82,7 +111,7 @@ npm test
 
 - `node test.js`: the owner's checks (pack structure, 60 synthetic cases, 18,000 random routes).
 - `tests/pinned-hashes.js`: fails if `engine.js`, the packs or `eval/cases.json` differ from the pinned v0.1.2 files.
-- `tests/app-checks.js`: the app's own logic with a fake model (sentence flow and fallback, hint ladder, learner code check, CSV).
+- `tests/app-checks.js`: the app's own logic with a fake model (sentence flow and fallback, curly apostrophes straightened before `parseChoice`, hint ladder, learner code check, CSV).
 
 ## Known limits
 
@@ -90,7 +119,7 @@ npm test
 - Every Sesotho field in the packs is empty on purpose. The app shows English with a tag until a Sesotho speaker writes them.
 - The eval cases in `eval/cases.json` are **synthetic**, written by the author. They are not learner data. Do not quote /eval results as learner results.
 - No accuracy or speed numbers are published here. Run /eval on the target laptop and use only those.
-- The first sentence exercise loads the model (about 491 MB) into memory. On a 4 GB laptop close other apps first.
+- The first sentence exercise loads the model (about 491 MB) into memory. On a 4 GB laptop close other apps first. ESTIMATE of peak memory for the browser tab, not measured: about 1.0 to 1.5 GB (weights about 470 MB in the model worker, up to 491 MB more if the browser keeps the loaded file in memory, KV cache about 13 MB at 1024 tokens, compute buffers about 150 to 300 MB, tab and page about 150 to 250 MB). Use the /eval page on the real laptop for the real figure where the browser reports it.
 - Very old browsers fall back to the slower compat build. Firefox without JSPI runs on the main build without compat, as wllama recommends.
 - Session notes are lost if the tab is closed before export.
 - The G910 predict exercises assume the ball starts at x -200, y 0 (see the pack notes). Confirm against the real starter file.

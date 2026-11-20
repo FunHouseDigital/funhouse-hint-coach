@@ -27,7 +27,7 @@ export async function diagnose(pack, ex, attempt, classify) {
   }
   const prompt = classifyPrompt(pack, ex, attempt);
   const { text, ms } = await classify(prompt);
-  const choice = parseChoice(text, ex);
+  const choice = parseChoice(straightApostrophes(text), ex);
   if (choice === null) {
     const r = evaluate(ex, attempt);
     return { ...r, checkedBy: 'baseline fallback', modelText: text, ms };
@@ -35,6 +35,9 @@ export async function diagnose(pack, ex, attempt, classify) {
   const complete = choice === 'ok';
   return { complete, misconception: complete ? null : choice, detail: {}, checkedBy: 'model', modelText: text, ms };
 }
+
+// Curly quotes (U+2018, U+2019) become a straight apostrophe, so "isn’t correct" reads as a negation.
+export const straightApostrophes = (s) => String(s ?? '').replace(/[\u2018\u2019]/g, "'");
 
 // True when a Sesotho hint was asked for but the pack has no Sesotho text for it.
 export function sesothoFellBack(pack, misconceptionId, level) {
