@@ -95,3 +95,5 @@ textarea.sent { width: 100%; min-height: 6rem; font: inherit; padding: .5rem; bo
 @media (max-width: 900px) { main { grid-template-columns: 1fr; } .mats { grid-template-columns: repeat(2, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .cap, .cap span { transition: none; } .spin { animation: none; } }
 .welcome .promise { font-size: 1.6rem; font-weight: 700; margin: 0 0 .5rem; }
+.facil { display: flex; gap: .4rem; flex-wrap: wrap; }
+.facil button { font-size: .85rem; }

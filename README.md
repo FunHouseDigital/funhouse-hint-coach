@@ -103,6 +103,33 @@ What `Start Hint Coach.cmd` is: one plain text file you can open in Notepad. The
 
 Host the folder on any web server (HTTPS, or `http://127.0.0.1`). Open it once while online and leave the tab open until the bottom of the help panel says **Ready offline.** (the model is about 491 MB). After that the app and /eval work with no network, in the same browser on the same laptop. If the server sends `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp`, the model can use more than one thread.
 
+### Airplane-mode check (do this on the real laptop)
+
+Only this check proves the laptop works with no network. The build PC test is an emulation (see below).
+
+**PWA way (loaded once online)**
+
+1. With the network on, start Hint Coach with `Start Hint Coach.cmd` (or the web server you use). Wait until the help panel says **Ready offline.**
+2. Close the browser and the black window.
+3. Turn on airplane mode, or unplug the network cable and turn off Wi-Fi.
+4. Start `Start Hint Coach.cmd` again, and the browser opens the app. (If step 1 used a web server instead, open the browser at the same address. The app must load from the offline cache.)
+5. Type learner code L1 and press Start.
+6. Open one exercise of each type: a route (build cards, Run my route, Get hint), a sort (put cards on mats, Get hint), a predict (type x and y, Get hint) and a sentence (type a sentence, Get hint).
+7. Wait for the sentence hint. The first one loads the helper model, then shows Thinking... and the seconds.
+8. Open the Eval page link. Press the two run buttons and wait until it says "Sentence cases done."
+9. Go back to the app and press Export session notes. A CSV file downloads.
+10. Pass: every step works, a hint or "Well done" shows on all four screens, /eval finishes, and the CSV opens with one row per hint. Fail: any "Something went wrong", "could not load" or browser "no internet" page. Write down which step failed.
+
+**USB-pack way (never online at all)**
+
+1. Use a laptop that has never opened Hint Coach. Turn on airplane mode first (or unplug the network) and leave it on.
+2. Copy the `usb-pack` folder from the USB stick to the laptop. Double-click `Start Hint Coach.cmd`.
+3. Do steps 5 to 9 above.
+4. Close the browser and the black window. Start `Start Hint Coach.cmd` again and do one sentence hint again.
+5. Pass: the same as above, with no network at any time.
+
+**What the build PC test did (emulated, not airplane mode)**: one online load through `Start Hint Coach.cmd`'s server, then the server was stopped, a new browser process opened with the same profile, DevTools offline emulation was on from the first request, and the browser could not resolve any host name except 127.0.0.1. All four screens, the sentence model, /eval and the CSV export worked. The Wi-Fi and network adapter of the PC stayed on, so this is not a real airplane-mode test.
+
 Opening `index.html` straight from the disk (`file://`) does **not** work. Browsers block modules, workers and the offline cache there.
 
 ## Tests
