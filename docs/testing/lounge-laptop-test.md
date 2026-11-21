@@ -18,6 +18,10 @@ Write the results in `lounge-laptop-results.txt` (in the same folder).
 6. Time how long it takes from opening the app to the model being ready. A stopwatch on your phone is fine.
 7. Switch the Wi-Fi off, reload the page and do one robot exercise and one sentence exercise. Write down whether the hints still appear and how many seconds they take.
 8. Press Shift+Esc inside Chrome. Write down the tab's "Memory footprint" at its peak and after your first hint.
+
+   At the same two moments, also write down from Windows Task Manager (open it with Ctrl+Shift+Esc):
+   - Details tab: the memory of powershell.exe, in the "Memory (active private working set)" column. This is the small web server; the Chrome number leaves it out.
+   - Performance tab > Memory: the total memory "In use".
 9. Open /eval, run it, press Download counts (.txt) and take a screenshot of the counts.
 10. Close the tab and check that the learner records are gone.
 

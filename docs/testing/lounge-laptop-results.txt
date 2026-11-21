@@ -24,6 +24,12 @@ Step 7  Wi-Fi off, page reloaded
 Step 8  Chrome Task manager (Shift+Esc), the Hint Coach tab's "Memory footprint"
         At its peak (MB):
         After your first hint (MB):
+        Windows Task Manager (Ctrl+Shift+Esc), at the same two moments
+        (the Chrome number leaves out the small web server, so record these too)
+        Details tab, powershell.exe "Memory (active private working set)" at the peak (MB):
+        Details tab, powershell.exe "Memory (active private working set)" after your first hint (MB):
+        Performance tab > Memory, "In use" at the peak (GB):
+        Performance tab > Memory, "In use" after your first hint (GB):
 
 Step 9  /eval counts, copied from the Download counts (.txt) file
         Route, sort, predict: ____ of ____ pass
