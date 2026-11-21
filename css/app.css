@@ -97,3 +97,8 @@ textarea.sent { width: 100%; min-height: 6rem; font: inherit; padding: .5rem; bo
 .welcome .promise { font-size: 1.6rem; font-weight: 700; margin: 0 0 .5rem; }
 .facil { display: flex; gap: .4rem; flex-wrap: wrap; }
 .facil button { font-size: .85rem; }
+/* Helpful / Not helpful: a pressed button must look pressed. */
+.hintbox .row { align-items: center; }
+.hintbox button.rate[aria-pressed="true"] { background: var(--good); border-color: var(--good); color: #fff; font-weight: 700; }
+.hintbox button.rate[aria-pressed="true"]::before { content: "\2713  "; }
+.hintbox .noted { color: var(--good); font-weight: 700; }

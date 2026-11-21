@@ -264,10 +264,21 @@ function renderHint() {
   const box = $('hintBox');
   const head = el('div', {}, el('strong', {}, `Hint ${level} of 3`));
   if (lang === 'st' && sesothoFellBack(cur.pack, id, level)) head.append(el('span', { class: 'tag' }, 'English until the Sesotho is checked'));
-  const rate = (v) => el('button', { type: 'button', 'aria-pressed': String(row.rating === v), onclick: () => { row.rating = v; renderHint(); } }, v === 'helpful' ? 'Helpful' : 'Not helpful');
+  // Helpful / Not helpful: recorded on this hint's session row (exercise id, level). Last tap wins.
+  // Updated in place (no re-render), so the button keeps focus and the pressed look shows at once.
+  const noted = el('span', { class: 'noted', role: 'status' }, notedText(row.rating));
+  const rate = (v) => el('button', { type: 'button', class: 'rate', 'data-rating': v, 'aria-pressed': String(row.rating === v), onclick: () => {
+    row.rating = v;
+    for (const b of box.querySelectorAll('button.rate')) b.setAttribute('aria-pressed', String(b.dataset.rating === v));
+    noted.textContent = notedText(v);
+  } }, v === 'helpful' ? 'Helpful' : 'Not helpful');
   box.replaceChildren(head, el('p', {}, text), el('div', { class: 'row' },
     el('button', { type: 'button', class: 'primary', onclick: () => requestHint(true) }, level < 3 ? 'More help' : 'Still stuck?'),
-    rate('helpful'), rate('not helpful')));
+    rate('helpful'), rate('not helpful'), noted));
+}
+
+function notedText(rating) {
+  return rating === 'helpful' ? 'Thanks. Noted: helpful.' : rating === 'not helpful' ? 'Thanks. Noted: not helpful.' : '';
 }
 
 function showDone(result) {

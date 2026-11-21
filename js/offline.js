@@ -3,7 +3,7 @@
 import { MODEL } from './config.js';
 
 // Must match the names in sw.js. Bump the shell version on every release so updates arrive.
-const SHELL = 'hint-coach-shell-v3';
+const SHELL = 'hint-coach-shell-v4';
 const MODEL_CACHE = 'hint-coach-model-' + MODEL.sha256.slice(0, 8);
 const base = new URL('../', import.meta.url);
 export const SHELL_FILES = [
@@ -62,8 +62,21 @@ export async function cachedModelBlob(onGot) {
 export async function registerOffline(msgEl) {
   if (!('serviceWorker' in navigator) || !('caches' in self)) { if (msgEl) msgEl.textContent = 'Offline mode not supported in this browser.'; return; }
   const say = (t) => { if (msgEl) msgEl.textContent = t; };
+  // When a newer version takes over, reload once so the new app shows straight away. Only while no
+  // learner has started (the start screen is showing), so no in-memory notes are ever lost.
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController || reloaded) return;
+    const started = document.getElementById('main') && !document.getElementById('main').hidden;
+    if (started) { say('A newer version is ready. Reload the page when this learner is done.'); return; }
+    reloaded = true;
+    location.reload();
+  });
   try {
     await navigator.serviceWorker.register(new URL('sw.js', base), { scope: base.pathname });
+    // Remove shell caches from older versions (an old page may have refilled one during the update).
+    for (const k of await caches.keys()) if (k.startsWith('hint-coach-shell-') && k !== SHELL) await caches.delete(k);
     const shell = await caches.open(SHELL);
     for (const f of SHELL_FILES) {
       const u = new URL(f, base).href;

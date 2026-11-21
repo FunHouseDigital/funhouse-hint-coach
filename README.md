@@ -16,7 +16,7 @@ It runs in the browser on the laptop itself. It needs no internet after the firs
 - Route, sort and predict answers are checked exactly by code (`engine.js`).
 - Sentence answers are read by a small language model on the laptop. The model only picks one label, using `classifyPrompt` and `parseChoice` from `engine.js`. If its reply is unclear, the app uses the keyword check in `engine.js` instead and notes "baseline fallback". The model never chats with the learner. Every hint shown comes from the packs through `hintFor`.
 - English and Sesotho hint toggle. The screen labels stay English. When a Sesotho hint is empty the app shows the English hint with the tag "English until the Sesotho is checked".
-- Every hint has Helpful / Not helpful buttons.
+- Every hint has Helpful / Not helpful buttons. A tapped button turns green with a tick and the app says "Thanks. Noted: ...". Tapping the other one changes the answer (last tap wins). Each rating is saved on that hint's row (exercise id and hint level) and appears in the CSV ating column. "Clear this learner's record" removes the ratings too.
 - **/eval/** page: runs the synthetic test cases. Route, sort and predict cases show pass or fail. Sentence cases run both the model and the keyword check side by side. It shows counts, for example "model X of N, keyword baseline Y of N", and timings (median and slowest model call), plus peak memory when the browser reports it. It shows no percentages and makes no accuracy claim. "Download full report" saves a JSON file and "Download counts (.txt)" saves the counts only.
 
 ## Privacy design
@@ -245,7 +245,7 @@ npm test
 - Very old browsers fall back to the slower compat build. Firefox without JSPI runs on the main build without compat, as wllama recommends.
 - Session notes are lost if the tab is closed before export.
 - The G910 predict exercises assume the ball starts at x -200, y 0 (see the pack notes). Confirm against the real starter file.
-- When the app is updated, bump the shell cache name in both `sw.js` and `js/offline.js` so laptops pick up the new files.
+- When the app is updated, bump the shell cache name in both `sw.js` and `js/offline.js` so laptops pick up the new files. From version v4 on, the app reloads itself once when a new version arrives, but only on the start screen, before a learner starts. The update from v3 to v4 is the exception: a laptop that had v3 shows the old app on the first open and the new one from the second open (close the tab and open the address again).
 
 ## Licences
 
