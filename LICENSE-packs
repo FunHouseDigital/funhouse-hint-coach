@@ -1,9 +1,16 @@
-The exercise packs in this folder (packs/*.json) are licensed under the
-Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+Licence for the FunHouse exercise and hint packs
 
+This licence covers:
+- the exercise and hint packs packs/*.json (t1-l1.json, t2-l1.json, t3-l1.json, g910-t1-l1.json),
+  including every exercise, hint, description and done message in them, and
+- the translation sheets docs/sesotho-translation-sheet.txt and docs/sesotho-unique-lines.txt,
+  because they reproduce the hint texts from the packs.
+
+They are licensed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
 Full text: https://creativecommons.org/licenses/by/4.0/legalcode
 
 Attribution: FunHouse Digital. Adapted from FunHouse facilitator cards.
 All hints are drafts and need a teacher check. Sesotho fields are empty.
 
+The app code is MIT (see LICENSE). Third-party parts are listed in NOTICE.
 (This file sits at the repo root, not in packs/, because the owner's test.js reads every file in packs/ as JSON.)

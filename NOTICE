@@ -1,0 +1,28 @@
+FunHouse Hint Coach - NOTICE
+
+FunHouse code
+- The FunHouse Hint Coach code is MIT licensed. See LICENSE.
+- The exercise and hint packs (packs/*.json) and the translation sheets in docs/ are CC BY 4.0. See LICENSE-packs.
+
+Third-party parts
+
+1. Qwen2.5-0.5B-Instruct (GGUF, Q4_K_M) - the helper model
+   Source repo: https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF
+   Revision:    9217f5db79a29953eb74d5343926648285ec7e67
+   File:        qwen2.5-0.5b-instruct-q4_k_m.gguf (491400032 bytes)
+   sha256:      74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db
+   Licence:     Apache License 2.0. Full text: licenses/Qwen2.5-0.5B-Instruct-LICENSE.txt
+                (downloaded from the same repo at the same revision).
+   Copyright:   Copyright 2024 Alibaba Cloud, as stated in that licence file. Made by the Qwen team.
+   Changes:     none. The file is used unmodified. It is not in the git repo; scripts/fetch-model.js
+                downloads it and checks the sha256. It is included in the USB pack.
+
+2. wllama - runs the model in the browser
+   Package:     @wllama/wllama 3.13.0 (npm), https://github.com/ngxson/wllama
+   Files:       vendor/wllama/index.js, vendor/wllama/wllama.wasm (unmodified)
+   Licence:     MIT, Copyright (c) 2024 Xuan Son NGUYEN. See vendor/wllama/LICENCE.
+
+3. wllama-compat - fallback build for older browsers
+   Package:     @wllama/wllama-compat 3.13.0 (npm), same author and repo as wllama
+   Files:       vendor/wllama-compat/wllama.js, vendor/wllama-compat/wllama.wasm (unmodified)
+   Licence:     MIT (as declared in the package's package.json). See vendor/wllama-compat/LICENCE.

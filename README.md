@@ -250,9 +250,11 @@ npm test
 ## Licences
 
 - Code: MIT, see `LICENSE`.
-- Exercise packs (`packs/*.json`): CC BY 4.0, see `LICENSE-packs`. (It sits at the root because `test.js` reads every file in `packs/` as JSON.)
-- wllama: MIT, see `vendor/wllama/LICENCE`.
-- Model: Apache 2.0, from the Qwen model card. The model file is not in this repo.
+- Exercise and hint packs (`packs/*.json`) and the translation sheets in `docs/` (they reproduce the hint texts): CC BY 4.0, see `LICENSE-packs`. (It sits at the root because `test.js` reads every file in `packs/` as JSON.)
+- wllama: MIT, see `vendor/wllama/LICENCE`. wllama-compat: MIT, see `vendor/wllama-compat/LICENCE` (a copy of the wllama notice, because the compat package ships no licence file; see `vendor/README.md`).
+- Model: Apache 2.0. The licence file from the pinned Qwen repo revision is `licenses/Qwen2.5-0.5B-Instruct-LICENSE.txt`. The model file is not in this repo and is used unmodified.
+- `NOTICE` lists every third-party part, with source, version, sha256 and licence.
+- In the USB pack, `NOTICE` and the Qwen licence are in `app/` (as `app/NOTICE` and `app/licenses/`) and again next to the model in `app/models/`.
 
 ## Sharing this repo
 

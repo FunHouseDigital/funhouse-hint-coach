@@ -20,7 +20,7 @@ const sum = await new Promise((res, rej) => { const h = createHash('sha256'); cr
 if (sum !== MODEL.sha256) { console.error('Model sha256 mismatch. Delete it and run fetch-model again.'); process.exit(1); }
 
 rmSync(out, { recursive: true, force: true });
-const files = [...SHELL_FILES.filter((f) => !f.endsWith('/')), 'sw.js', 'LICENSE', 'LICENSE-packs', 'vendor/wllama/LICENCE', 'vendor/README.md', MODEL.path];
+const files = [...SHELL_FILES.filter((f) => !f.endsWith('/')), 'sw.js', 'LICENSE', 'LICENSE-packs', 'vendor/wllama/LICENCE', 'vendor/wllama-compat/LICENCE', 'vendor/README.md', 'NOTICE', 'licenses/Qwen2.5-0.5B-Instruct-LICENSE.txt', MODEL.path];
 for (const f of files) {
   const dest = join(out, 'app', f);
   mkdirSync(dirname(dest), { recursive: true });
@@ -28,6 +28,9 @@ for (const f of files) {
 }
 cpSync(join(root, 'usb', 'Start Hint Coach.cmd'), join(out, 'Start Hint Coach.cmd'));
 cpSync(join(root, 'docs', 'testing'), join(out, 'testing'), { recursive: true });
+// The model's licence and the NOTICE also sit right next to the model file.
+cpSync(join(root, 'NOTICE'), join(out, 'app', dirname(MODEL.path), 'NOTICE'));
+cpSync(join(root, 'licenses', 'Qwen2.5-0.5B-Instruct-LICENSE.txt'), join(out, 'app', dirname(MODEL.path), 'Qwen2.5-0.5B-Instruct-LICENSE.txt'));
 writeFileSync(join(out, 'README-USB.txt'), [
   'FunHouse Hint Coach - USB pack',
   '',

@@ -1,6 +1,9 @@
 # Vendored files
 
-Copied unchanged from npm. Pinned exact versions. Both are MIT (licence in vendor/wllama/LICENCE, same author and licence for the compat package).
+Copied unchanged from npm. Pinned exact versions. Both are MIT.
+
+- `wllama/LICENCE` is the licence file from the @wllama/wllama@3.13.0 package.
+- `wllama-compat/LICENCE`: the @wllama/wllama-compat@3.13.0 npm package has no licence file of its own (it holds only index.js, package.json, README.md and wasm/). Its package.json declares `"license": "MIT"` with the same author (Xuan Son NGUYEN). So this file is a copy of the wllama MIT notice.
 
 | File | From | sha256 |
 |---|---|---|
