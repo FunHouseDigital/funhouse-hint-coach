@@ -1,10 +1,10 @@
 # FunHouse Hint Coach
 
+> Status: prototype. Tested on synthetic cases only. Not yet used with learners. Sesotho hints are empty until a Sesotho speaker writes them. All hints are drafts and need a teacher check.
+
 A small offline helper for FunHouse exercises. A learner tries an exercise. When they are stuck they press **Get hint**. The app works out the likely mistake and shows a short hint. **More help** shows a stronger hint, up to three. After that it says "Ask your facilitator".
 
 It runs in the browser on the laptop itself. It needs no internet after the first load, no account and no server on the internet.
-
-**Status: draft.** All hints are drafts and need a teacher check before real use.
 
 ## What it does
 
@@ -17,7 +17,7 @@ It runs in the browser on the laptop itself. It needs no internet after the firs
 - Sentence answers are read by a small language model on the laptop. The model only picks one label, using `classifyPrompt` and `parseChoice` from `engine.js`. If its reply is unclear, the app uses the keyword check in `engine.js` instead and notes "baseline fallback". The model never chats with the learner. Every hint shown comes from the packs through `hintFor`.
 - English and Sesotho hint toggle. The screen labels stay English. When a Sesotho hint is empty the app shows the English hint with the tag "English until the Sesotho is checked".
 - Every hint has Helpful / Not helpful buttons.
-- **/eval/** page: runs the synthetic test cases. Route, sort and predict cases show pass or fail. Sentence cases run both the model and the keyword check side by side and show accuracy, median and slowest model time, and peak memory when the browser reports it. "Download full report" saves a JSON file.
+- **/eval/** page: runs the synthetic test cases. Route, sort and predict cases show pass or fail. Sentence cases run both the model and the keyword check side by side. It shows counts, for example "model X of N, keyword baseline Y of N", and timings (median and slowest model call), plus peak memory when the browser reports it. It shows no percentages and makes no accuracy claim. "Download full report" saves a JSON file and "Download counts (.txt)" saves the counts only.
 
 ## Privacy design
 
@@ -240,7 +240,7 @@ npm test
 - All hints are drafts and need a teacher check.
 - Every Sesotho field in the packs is empty on purpose. The app shows English with a tag until a Sesotho speaker writes them.
 - The eval cases in `eval/cases.json` are **synthetic**, written by the author. They are not learner data. Do not quote /eval results as learner results.
-- No accuracy or speed numbers are published here. Run /eval on the target laptop and use only those.
+- No /eval counts or speed numbers are published here. Run /eval on the target laptop and use only those counts and timings.
 - The first sentence exercise loads the model (about 491 MB) into memory. On a 4 GB laptop close other apps first. Measured on the build PC only (this PC, not the school laptop; headless Chrome, 4 threads, private memory of each Chrome process): the Hint Coach tab used about 30 MB before the model, up to about 1,040 MB while loading the model and answering, and about 830 MB after one hint. All Chrome processes together peaked at about 1,220 MB. The model is read from the offline cache as a disk-backed file, so the page does not keep a second full copy. Use the /eval page on the real laptop for its own figure.
 - Very old browsers fall back to the slower compat build. Firefox without JSPI runs on the main build without compat, as wllama recommends.
 - Session notes are lost if the tab is closed before export.
