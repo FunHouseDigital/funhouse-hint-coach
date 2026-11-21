@@ -48,11 +48,17 @@ export function buildUniqueSheet() {
     for (const [id, h] of Object.entries(p.hints)) h.en.forEach((en, i) => { if (!lines.has(en)) lines.set(en, []); lines.get(en).push(`${f} | ${id} | ${i + 1}`); });
     if ('st' in p.done) { if (!lines.has(p.done.en)) lines.set(p.done.en, []); lines.get(p.done.en).push(`${f} | done | -`); }
   }
+  const sorted = [...lines].map((x, i) => [...x, i]).sort((a, b) => b[1].length - a[1].length || a[2] - b[2]);
+  // The lines used in more than one place come first. They are the ones that matter most.
+  const top = sorted.filter(([, keys]) => keys.length > 1);
+  const topPlaces = top.reduce((n, [, keys]) => n + keys.length, 0);
+  const allPlaces = sorted.reduce((n, [, keys]) => n + keys.length, 0);
   const L = [
     'FunHouse Hint Coach - Sesotho translation sheet (short version: each English line once)',
     '',
     'What this is: every different English line the Hint Coach app can show. Lines used in the most places come first.',
     'Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under it.',
+    `Start at the top, because the first ${top.length} lines matter most and fill almost half the app. The rest is a bonus if you have time.`,
     '',
     'Rules:',
     '- Do not change the lines in square brackets, like [U12] or [t1-l1.json | lr_swapped | 2]. They tell us where your text goes.',
@@ -61,11 +67,11 @@ export function buildUniqueSheet() {
     '- All English lines are drafts too. Tell us if an English line is unclear.',
     '',
   ];
-  const sorted = [...lines].map((x, i) => [...x, i]).sort((a, b) => b[1].length - a[1].length || a[2] - b[2]);
   let n = 0;
   for (const [en, keys] of sorted) {
     n++;
     L.push(`[U${n}]`, 'English: ' + en, `Used in ${keys.length} place${keys.length === 1 ? '' : 's'}:`, ...keys.map((k) => '  [' + k + ']'), 'Sesotho: ', '');
+    if (n === top.length && top.length > 0) L.push(`---- Lines U1 to U${n} above fill ${topPlaces} of the ${allPlaces} places. The lines below are a bonus. ----`, '');
   }
   L.push('End of sheet. Lines: ' + n, '');
   return { text: L.join('\r\n'), count: n };

@@ -2,6 +2,7 @@
 
 What this is: every different English line the Hint Coach app can show. Lines used in the most places come first.
 Please write the Sesotho on the line that starts with "Sesotho:". It is used in every place listed under it.
+Start at the top, because the first 21 lines matter most and fill almost half the app. The rest is a bonus if you have time.
 
 Rules:
 - Do not change the lines in square brackets, like [U12] or [t1-l1.json | lr_swapped | 2]. They tell us where your text goes.
@@ -166,6 +167,8 @@ Used in 2 places:
   [t2-l1.json | stopped_short | 2]
   [t2-l1.json | went_too_far | 2]
 Sesotho: 
+
+---- Lines U1 to U21 above fill 53 of the 112 places. The lines below are a bonus. ----
 
 [U22]
 English: Count the squares the robot steps ON, not the one it starts on.
