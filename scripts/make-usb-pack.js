@@ -27,6 +27,7 @@ for (const f of files) {
   cpSync(join(root, f), dest);
 }
 cpSync(join(root, 'usb', 'Start Hint Coach.cmd'), join(out, 'Start Hint Coach.cmd'));
+cpSync(join(root, 'docs', 'testing'), join(out, 'testing'), { recursive: true });
 writeFileSync(join(out, 'README-USB.txt'), [
   'FunHouse Hint Coach - USB pack',
   '',

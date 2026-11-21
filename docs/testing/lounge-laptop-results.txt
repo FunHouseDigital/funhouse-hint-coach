@@ -1,0 +1,41 @@
+Lounge laptop test - results
+(Steps are in lounge-laptop-test.md. Write on the empty line after each colon. No learner names or answers here.)
+
+Date and time:
+Tries (1 or 2):
+
+Step 1  Laptop memory (RAM), e.g. 4 GB:
+
+Step 4  Start file sha256 you saw:
+        Expected: DFB4BFE04B707AA0344707BA661EB4B42617B49CEAD07FD6A81EE4D1C4DAC22E (ends ...ac22e)
+        Same? (yes / no):
+
+Step 5  What happened when you double-clicked Start Hint Coach.cmd
+        (opened straight away / blue box then Run anyway / blocked - screenshot taken):
+
+Step 6  Seconds from opening the app to the model being ready:
+
+Step 7  Wi-Fi off, page reloaded
+        Robot exercise: hints appeared (yes / no):
+        Robot exercise: seconds for the hint:
+        Sentence exercise: hints appeared (yes / no):
+        Sentence exercise: seconds for the hint:
+
+Step 8  Chrome Task manager (Shift+Esc), the Hint Coach tab's "Memory footprint"
+        At its peak (MB):
+        After your first hint (MB):
+
+Step 9  /eval counts, copied from the Download counts (.txt) file
+        Route, sort, predict: ____ of ____ pass
+        Sentence: model ____ of ____, keyword baseline ____ of ____
+        Model replies it could not read: ____ of ____
+        Model call ms: median ____, slowest ____
+        Peak memory (as /eval reports it):
+        Threads used:
+        Screenshot taken (yes / no):
+
+Step 10 After closing the tab, learner records gone (yes / no):
+
+What went wrong, exactly (copy any message word for word):
+
+

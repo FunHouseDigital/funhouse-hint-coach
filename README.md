@@ -192,6 +192,10 @@ If `Start Hint Coach.cmd` ever changes, this README line must be updated in the 
 - Copying the pack to another PC, and running it straight from the USB stick.
 - Windows 10.
 
+### Lounge laptop test
+
+The owner's step-by-step test for a real low-spec laptop: [docs/testing/lounge-laptop-test.md](docs/testing/lounge-laptop-test.md). Write the results in [docs/testing/lounge-laptop-results.txt](docs/testing/lounge-laptop-results.txt). Both files are also in the USB pack, in the `testing` folder.
+
 ### Airplane-mode check (do this on the real laptop)
 
 Only this check proves the laptop works with no network. The build PC test is an emulation (see below).
